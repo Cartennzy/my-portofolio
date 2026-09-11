@@ -17,8 +17,7 @@ const codingProjects = [
     accent: "from-emerald-500/30 via-teal-600/15 to-transparent",
     desc: "Platform web untuk konsultasi kesehatan mental dan screening psikologis online, dilengkapi sistem booking jadwal serta manajemen rekam medis yang aman.",
     demoLink: "https://mind-haven-opal.vercel.app/",
-    demoLabel: "LIVE DEPLOY",
-    githubLink: "https://github.com/najwan/mindhaven",
+    demoLabel: "KUNJUNGI WEB",
     challenge: "Menyediakan layanan konsultasi psikologis online yang mudah diakses, responsif, dan menjaga kerahasiaan data pribadi pasien.",
     solution: "Mengembangkan aplikasi web menggunakan Next.js dan Laravel untuk menangani antrean sesi, pencatatan rekam medis, serta fitur konsultasi interaktif.",
     techStack: ["Next.js", "Laravel", "PostgreSQL", "Tailwind CSS"],
@@ -53,8 +52,7 @@ export const handlePatientData = async (payload: PatientRecord) => {
     accent: "from-blue-600/30 via-indigo-600/15 to-transparent",
     desc: "Aplikasi pemesanan lapangan olahraga secara real-time untuk menghindari bentrok jadwal, lengkap dengan sistem konfirmasi pembayaran digital.",
     demoLink: "https://victory-arena-zeta.vercel.app/",
-    demoLabel: "LIVE DEPLOY",
-    githubLink: "https://github.com/najwan/futsal-booking",
+    demoLabel: "KUNJUNGI WEB",
     challenge: "Sering terjadi kesalahan pencatatan jadwal (double booking) pada jam operasional sibuk di akhir pekan.",
     solution: "Menerapkan sistem penguncian slot berbasis database transaksi otomatis dan pembaruan jadwal secara real-time di sisi antarmuka.",
     techStack: ["React", "Node.js", "PostgreSQL", "Express"],
@@ -91,8 +89,7 @@ const bookSlot = async (slotId, userId) => {
     accent: "from-amber-500/30 via-yellow-600/15 to-transparent",
     desc: "Proyek sistem pengelolaan kas kecil dan pengajuan klaim dana operasional yang sedang dalam tahap pengembangan aktif untuk digitalisasi proses keuangan perusahaan.",
     demoLink: "#",
-    demoLabel: "SOON",
-    githubLink: "https://github.com/najwan/petty-claim",
+    demoLabel: "SEGERA HADIR",
     challenge: "Mengganti alur klaim manual berbasis kertas menjadi platform digital terintegrasi yang transparan dan mudah diaudit.",
     solution: "Merancang arsitektur multi-approval berjenjang dengan pencatatan log aktivitas otomatis dan penyimpanan bukti transaksi digital.",
     techStack: ["Laravel", "Vue.js", "MySQL", "Docker"],
@@ -123,15 +120,14 @@ const dataAnalystProjects = [
     title: "Supermarket Analysis Business Intelligence Dashboard",
     category: "Microsoft Power BI, Analisis Pendapatan & Cabang Kota",
     image: "/logo-powerbi.png",
-    link: "https://github.com",
+    link: "/SuperMarket_Analysis_BI_Dashboard.pdf",
     badge: "Power BI Analytics",
     scale: "scale-110",
     glowColor: "rgba(239, 68, 68, 0.45)",
     accent: "from-red-500/30 via-orange-600/15 to-transparent",
     desc: "Dashboard analitik Power BI interaktif untuk memonitor ringkasan eksekutif supermarket, mencakup total pendapatan, profit bersih, serta performa per cabang kota.",
     demoLink: "/SuperMarket_Analysis_BI_Dashboard.pdf", 
-    demoLabel: "VIEW PDF", 
-    githubLink: "https://github.com/najwan/supermarket-bi",
+    demoLabel: "BUKA LAPORAN", 
     challenge: "Manajemen kesulitan memonitor performa penjualan antar cabang karena laporan masih menggunakan file terpisah.",
     solution: "Menggabungkan berbagai sumber data ke dalam Power BI dan merancang dasbor terpusat yang bisa difilter berdasarkan kota dan rentang waktu.",
     techStack: ["Power BI", "Power Query", "DAX", "Excel"],
@@ -159,14 +155,14 @@ DIVIDE(CurrentRevenue - PreviousYearRevenue, PreviousYearRevenue, 0)`
     title: "Global Superstore: Product & Sales Analytics Dashboard",
     category: "Microsoft Power BI, Analisis Produk Unggulan & Peramalan",
     image: "/logo-powerbi.png",
-    link: "https://github.com",
+    link: "/Global_Superstore_BI.pdf",
     badge: "Power BI Analytics",
     scale: "scale-110",
     glowColor: "rgba(245, 158, 11, 0.45)",
     accent: "from-amber-500/30 via-orange-600/15 to-transparent",
+    desc: "Visualisasi mendalam analisis performa produk global untuk memetakan volume penjualan dan batas keuntungan produk.",
     demoLink: "/Global_Superstore_BI.pdf", 
-    demoLabel: "VIEW PDF", 
-    githubLink: "https://github.com/najwan/global-superstore-bi",
+    demoLabel: "BUKA LAPORAN", 
     challenge: "Perusahaan perlu mengetahui produk mana yang penjualannya tinggi namun memberikan margin keuntungan yang kecil.",
     solution: "Membuat visualisasi matriks profitabilitas produk serta grafik peramalan tren penjualan di masa depan.",
     techStack: ["Power BI", "Python (Pandas)", "SQL", "DAX"],
@@ -197,14 +193,14 @@ const uiuxProjects = [
     title: "QurbanKu: Aplikasi Pemesanan Hewan Qurban",
     category: "Desain UI/UX Mobile, Alur Pengguna & Prototipe Figma",
     image: "/logo-qurbanku.jpg",
-    link: "https://figma.com",
+    link: "https://www.figma.com/proto/pQGRgNeCvFG6hfvQZLSrh3/QurbanKu?node-id=1-4&p=f&t=TX7KPEE32XTModMx-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A4&show-proto-sidebar=1",
     badge: "Mobile UI/UX",
     scale: "scale-115",
     glowColor: "rgba(13, 82, 232, 0.45)",
     accent: "from-blue-600/30 via-indigo-600/15 to-transparent",
     desc: "Perancangan antarmuka aplikasi mobile qurban mulai dari riset kebutuhan pengguna, penyusunan alur (user flow), hingga prototipe interaktif di Figma.",
     demoLink: "https://www.figma.com/proto/pQGRgNeCvFG6hfvQZLSrh3/QurbanKu?node-id=1-4&p=f&t=TX7KPEE32XTModMx-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A4&show-proto-sidebar=1",
-    githubLink: "https://dribbble.com/najwan",
+    demoLabel: "BUKA PROTOTIPE",
     challenge: "Alur pembelian hewan qurban pada platform lain seringkali membingungkan dan membuat pengguna ragu untuk bertransaksi.",
     solution: "Menyederhanakan proses pemesanan menjadi 3 langkah mudah, memperjelas informasi produk, dan menggunakan skema warna yang menumbuhkan kepercayaan.",
     techStack: ["Figma", "Design Tokens", "Atomic Design", "Prototyping"],
@@ -234,14 +230,14 @@ const uiuxProjects = [
     title: "Reliev: Portal Konsultasi & Kesehatan Mental",
     category: "Desain UI/UX Web & Mobile, Sistem Desain & Pemetaan Empati",
     image: "/logo-reliev.jpg",
-    link: "https://figma.com",
+    link: "https://www.figma.com/proto/XOTxYyomD33qit71MW8ldY/Reliev?t=IeqgWbPAgIX7NZjV-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&node-id=6-5&starting-point-node-id=6%3A5",
     badge: "MOBILE UI/UX",
     scale: "scale-120",
     glowColor: "rgba(16, 185, 129, 0.45)",
     accent: "from-emerald-500/30 via-teal-600/15 to-transparent",
     desc: "Perancangan tampilan antarmuka layanan konsultasi psikologi yang memberikan rasa aman, privat, serta kenyamanan visual bagi pengguna.",
     demoLink: "https://www.figma.com/proto/XOTxYyomD33qit71MW8ldY/Reliev?t=IeqgWbPAgIX7NZjV-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&node-id=6-5&starting-point-node-id=6%3A5",
-    githubLink: "https://dribbble.com/najwan",
+    demoLabel: "BUKA PROTOTIPE",
     challenge: "Aplikasi kesehatan mental seringkali berkesan kaku atau menegangkan bagi pengguna yang sedang mengalami stres.",
     solution: "Menggunakan palet warna lembut (Emerald & Teal), tata letak yang lapang, serta kalimat sapaan yang suportif untuk menciptakan suasana yang menenangkan.",
     techStack: ["Figma", "Wireframing", "Empathy Mapping", "Psychology Design"],
@@ -538,7 +534,7 @@ export default function ProjectsPage() {
 
       {/* ================= 3. EDITORIAL MINIMALIST HERO ================= */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-8 pt-28 pb-10 sm:pt-36 sm:pb-14 text-center">
-        
+
         {/* Pill Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-200/70 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 backdrop-blur-md shadow-xs mb-5">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -572,7 +568,7 @@ export default function ProjectsPage() {
               <button
                 key={t.key}
                 onClick={(e) => { handleRipple(e); setActiveFilter(t.key as any); }}
-                className={`relative overflow-hidden px-4 sm:px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                className={`relative overflow-hidden px-4 sm:px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap active:scale-95 active:translate-y-0.5 ${
                   activeFilter === t.key 
                     ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-md scale-[1.02]" 
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
@@ -612,7 +608,7 @@ export default function ProjectsPage() {
                   onMouseMove={handleBentoMouseMove}
                   onClick={(e) => { handleRipple(e); openModal(project); }}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openModal(project); }}
-                  className="relative group rounded-3xl p-px transition-all duration-300 hover:-translate-y-1.5 flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50"
+                  className="relative group rounded-3xl p-px transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.98] flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50"
                   project-card-trigger="true"
                 >
                   <div
@@ -629,7 +625,7 @@ export default function ProjectsPage() {
                         <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 font-mono text-[11px] font-bold text-slate-500 dark:text-slate-400">
                           0{idx + 1}
                         </span>
-                        
+
                         {/* Status Badge Khusus In Progress */}
                         {project.badge === "In Progress" ? (
                           <span className="px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-mono text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5">
@@ -715,7 +711,7 @@ export default function ProjectsPage() {
                   onMouseMove={handleBentoMouseMove}
                   onClick={(e) => { handleRipple(e); openModal(project); }}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openModal(project); }}
-                  className="relative group rounded-3xl p-px transition-all duration-300 hover:-translate-y-1.5 flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/50"
+                  className="relative group rounded-3xl p-px transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.98] flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/50"
                   project-card-trigger="true"
                 >
                   <div
@@ -785,7 +781,7 @@ export default function ProjectsPage() {
           </div>
         )}
 
-        {/* ================= SECTION 3: UI/UX DESIGN PROJECTS (QURBANKU & RELIEV) ================= */}
+        {/* ================= SECTION 3: UI/UX DESIGN PROJECTS ================= */}
         {(activeFilter === "all" || activeFilter === "uiux") && (
           <div className="space-y-8 animate-[fade-in_0.4s_ease-out]">
             <div className="flex items-center gap-3 pb-4 border-b border-slate-200/80 dark:border-white/10">
@@ -809,7 +805,7 @@ export default function ProjectsPage() {
                   onMouseMove={handleBentoMouseMove}
                   onClick={(e) => { handleRipple(e); openModal(project); }}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openModal(project); }}
-                  className="relative group rounded-3xl p-px transition-all duration-300 hover:-translate-y-1.5 flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50"
+                  className="relative group rounded-3xl p-px transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.98] flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50"
                   project-card-trigger="true"
                 >
                   <div
@@ -894,48 +890,62 @@ export default function ProjectsPage() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
-            className={`relative z-10 w-full max-w-4xl max-h-[90vh] bg-slate-900/95 border border-indigo-500/30 rounded-3xl shadow-[0_0_50px_rgba(99,102,241,0.2)] flex flex-col overflow-hidden transition-all duration-300 transform ${isModalOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
+            className={`relative z-10 w-full max-w-4xl max-h-[90vh] bg-slate-900/95 border border-indigo-500/30 rounded-3xl shadow-[0_0_50px_rgba(99,102,241,0.25)] flex flex-col overflow-hidden transition-all duration-300 transform ${isModalOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
           >
             {/* Header Bar */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/5 backdrop-blur-xl shrink-0">
-              <div className="flex flex-col gap-1 pr-4">
+            <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-white/10 bg-white/5 backdrop-blur-xl shrink-0 gap-3">
+              <div className="flex flex-col gap-1 min-w-0 flex-1">
                 <span className="inline-block px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-cyan-400 font-mono text-[10px] font-semibold uppercase tracking-wider w-max">
                   {selectedProject.badge}
                 </span>
-                <h3 id="modal-title" className="text-lg sm:text-xl font-bold text-white leading-tight line-clamp-1">
+                <h3 id="modal-title" className="text-base sm:text-xl font-bold text-white leading-tight truncate">
                   {selectedProject.title}
                 </h3>
               </div>
-              <div className="flex items-center gap-3 shrink-0">
-                <div className="hidden sm:flex gap-2">
-                  <a href={selectedProject.link === "#" ? undefined : selectedProject.link} target="_blank" rel="noreferrer" onClick={handleRipple} className={`relative overflow-hidden px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-md active:scale-95 flex items-center gap-1.5 ${selectedProject.link === "#" ? "bg-slate-700 text-slate-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-500 text-white cursor-pointer"}`}>
-                    <span className="relative z-10">{selectedProject.demoLabel || "Live Demo"}</span>
-                    {selectedProject.demoLabel === "VIEW" ? (
-                      <svg className="relative z-10 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
-                    ) : (
-                      <svg className="relative z-10 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                    )}
+
+              {/* Action Buttons: Tombol GitHub dihapus, Tombol Web Utama Selalu Tampil Responsif */}
+              <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                {selectedProject.demoLink && selectedProject.demoLink !== "#" ? (
+                  <a
+                    href={selectedProject.demoLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={handleRipple}
+                    className="relative overflow-hidden group/btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-linear-to-r from-blue-600 via-indigo-600 to-cyan-500 text-white font-black text-[11px] sm:text-xs uppercase tracking-widest transition-all duration-200 shadow-lg shadow-indigo-500/30 hover:shadow-cyan-500/50 hover:scale-[1.02] active:scale-95 active:translate-y-0.5 flex items-center gap-2 cursor-pointer border border-cyan-400/40"
+                  >
+                    <span className="absolute inset-0 bg-white/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    <span className="relative z-10">{selectedProject.demoLabel || "Kunjungi Web"}</span>
+                    <svg className="relative z-10 w-3.5 h-3.5 transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
                   </a>
-                  <a href={selectedProject.githubLink} target="_blank" rel="noreferrer" onClick={handleRipple} className="relative overflow-hidden px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/10 text-white rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 active:scale-95 flex items-center gap-1.5 cursor-pointer">
-                    <svg className="relative z-10 w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg>
-                    <span className="relative z-10">Code</span>
-                  </a>
-                </div>
-                <button onClick={closeModal} aria-label="Close modal" className="group w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-rose-500 hover:border-rose-500 transition-all duration-300">
-                  <svg className="w-4 h-4 text-slate-300 group-hover:text-white transform group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+                ) : (
+                  <span className="px-3.5 py-2 bg-slate-800/80 border border-white/10 text-slate-400 rounded-full text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider cursor-not-allowed">
+                    {selectedProject.demoLabel || "Segera Hadir"}
+                  </span>
+                )}
+
+                <button
+                  onClick={closeModal}
+                  aria-label="Close modal"
+                  className="group w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-rose-500 hover:border-rose-500 transition-all duration-300 shrink-0 cursor-pointer"
+                >
+                  <svg className="w-4 h-4 text-slate-300 group-hover:text-white transform group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
               </div>
             </div>
 
             {/* Interactive Tab Switcher */}
             <div className="flex items-center overflow-x-auto border-b border-white/10 bg-[#030712]/50 px-4 shrink-0 scrollbar-hide">
-              <button onClick={() => setActiveModalTab("showcase")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 ${activeModalTab === "showcase" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
+              <button onClick={() => setActiveModalTab("showcase")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 cursor-pointer ${activeModalTab === "showcase" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
                 01. Showcase
               </button>
-              <button onClick={() => setActiveModalTab("architecture")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 ${activeModalTab === "architecture" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
+              <button onClick={() => setActiveModalTab("architecture")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 cursor-pointer ${activeModalTab === "architecture" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
                 02. Architecture & Tech
               </button>
-              <button onClick={() => setActiveModalTab("benchmarks")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 ${activeModalTab === "benchmarks" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
+              <button onClick={() => setActiveModalTab("benchmarks")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 cursor-pointer ${activeModalTab === "benchmarks" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
                 03. Benchmarks & Impact
               </button>
             </div>
@@ -1029,7 +1039,7 @@ export default function ProjectsPage() {
             <div className="px-6 py-4 border-t border-white/10 bg-slate-900 flex justify-end shrink-0">
               <button 
                 onClick={(e) => { handleRipple(e); closeModal(); }}
-                className="relative overflow-hidden px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-200 border border-white/10 active:scale-95 cursor-pointer"
+                className="relative overflow-hidden px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-200 border border-white/10 active:scale-95 active:translate-y-0.5 cursor-pointer"
               >
                 <span className="relative z-10">Back to Overview</span>
               </button>

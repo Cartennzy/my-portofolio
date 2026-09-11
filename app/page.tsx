@@ -9,7 +9,7 @@ export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isPillarsVisible, setIsPillarsVisible] = useState(false);
-  
+
   // --- Modal State ---
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
@@ -223,7 +223,7 @@ export default function Home() {
     circle.style.animation = "saas-ripple 0.65s cubic-bezier(0.2, 0.8, 0.2, 1)";
     circle.style.pointerEvents = "none";
     circle.style.zIndex = "20";
-    
+
     if (!document.getElementById("ripple-keyframes")) {
       const style = document.createElement("style");
       style.id = "ripple-keyframes";
@@ -242,7 +242,7 @@ export default function Home() {
 
     circle.className = "saas-ripple-span";
     button.appendChild(circle);
-    
+
     setTimeout(() => {
       circle.remove();
     }, 650);
@@ -284,7 +284,7 @@ export default function Home() {
     { name: "Figma", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
   ];
 
-  // Upgraded Project Data Sesuai Halaman Projects (MindHaven, Victory Arena, Petty Claim)
+  // Upgraded Project Data Sesuai Halaman Projects
   const projects = [
     {
       id: "mental-health",
@@ -297,7 +297,7 @@ export default function Home() {
       scale: "scale-120",
       glowColor: "rgba(16, 185, 129, 0.45)",
       demoLink: "https://mind-haven-opal.vercel.app/",
-      githubLink: "https://github.com/najwan/mindhaven",
+      demoLabel: "KUNJUNGI WEB",
       challenge: "Menyediakan layanan konsultasi psikologis online yang mudah diakses, responsif, dan menjaga kerahasiaan data pribadi pasien.",
       solution: "Mengembangkan aplikasi web menggunakan Next.js dan Laravel untuk menangani antrean sesi, pencatatan rekam medis, serta fitur konsultasi interaktif.",
       techStack: ["Next.js", "Laravel", "PostgreSQL", "Tailwind CSS"],
@@ -332,8 +332,7 @@ export const handlePatientData = async (payload: PatientRecord) => {
       accent: "from-blue-600/30 via-indigo-600/15 to-transparent",
       desc: "Aplikasi pemesanan lapangan olahraga secara real-time untuk menghindari bentrok jadwal, lengkap dengan sistem konfirmasi pembayaran digital.",
       demoLink: "https://victory-arena-zeta.vercel.app/",
-      demoLabel: "LIVE DEPLOY",
-      githubLink: "https://github.com/najwan/futsal-booking",
+      demoLabel: "KUNJUNGI WEB",
       challenge: "Sering terjadi kesalahan pencatatan jadwal (double booking) pada jam operasional sibuk di akhir pekan.",
       solution: "Menerapkan sistem penguncian slot berbasis database transaksi otomatis dan pembaruan jadwal secara real-time di sisi antarmuka.",
       techStack: ["React", "Node.js", "PostgreSQL", "Express"],
@@ -370,8 +369,7 @@ const bookSlot = async (slotId, userId) => {
       accent: "from-amber-500/30 via-yellow-600/15 to-transparent",
       desc: "Proyek sistem pengelolaan kas kecil dan pengajuan klaim dana operasional yang sedang dalam tahap pengembangan aktif untuk digitalisasi proses keuangan perusahaan.",
       demoLink: "#",
-      demoLabel: "SOON",
-      githubLink: "https://github.com/najwan/petty-claim",
+      demoLabel: "SEGERA HADIR",
       challenge: "Mengganti alur klaim manual berbasis kertas menjadi platform digital terintegrasi yang transparan dan mudah diaudit.",
       solution: "Merancang arsitektur multi-approval berjenjang dengan pencatatan log aktivitas otomatis dan penyimpanan bukti transaksi digital.",
       techStack: ["Laravel", "Vue.js", "MySQL", "Docker"],
@@ -397,7 +395,7 @@ public function submitClaim(Request $request) {
 
   return (
     <div className="relative w-full min-h-screen bg-[#f8fafc] dark:bg-[#030712] text-slate-900 dark:text-slate-100 selection:bg-[#0D52E8] selection:text-white overflow-hidden font-sans transition-colors duration-300">
-      
+
       {/* ================= 0. TOP SCROLL PROGRESS BAR ================= */}
       <div className="fixed top-0 left-0 w-full h-0.75 z-50 pointer-events-none bg-slate-200/50 dark:bg-white/5">
         <div
@@ -426,14 +424,13 @@ public function submitClaim(Request $request) {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000006_1px,transparent_1px),linear-gradient(to_bottom,#00000006_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-size-[48px_48px] pointer-events-none" />
       </div>
 
-      {/* ================= 3. HERO SECTION (UPGRADED HIGH-LEVEL SAAS LANDING) ================= */}
+      {/* ================= 3. HERO SECTION ================= */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-28 pb-16 lg:pt-36 lg:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
-          {/* LEFT COLUMN: Editorial Typography & Value Proposition */}
+
+          {/* LEFT COLUMN */}
           <div className="lg:col-span-7 space-y-7 text-left">
-            
-            {/* Main Title dengan Animasi Shimmer & Fluid Gradient Flow */}
+
             <div className="space-y-2">
               <h1 className="relative text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1] drop-shadow-sm group">
                 <span className="bg-linear-to-r from-slate-950 via-slate-600 to-slate-950 dark:from-white dark:via-slate-200 dark:to-white bg-clip-text text-transparent bg-size-[200%_auto] animate-text-shimmer inline-block">
@@ -442,18 +439,16 @@ public function submitClaim(Request $request) {
                 <span className="absolute -inset-x-2 -inset-y-1 bg-indigo-500/10 dark:bg-cyan-400/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 pointer-events-none rounded-full" />
               </h1>
 
-              {/* Sub-judul: Flowing Neon Gradient */}
               <h2 className="text-xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight hero-gradient-text drop-shadow-[0_0_20px_rgba(56,189,248,0.25)]">
                 Full-Stack Developer & UI UX Designer
               </h2>
             </div>
 
-            {/* Bio Penjelas Realistis & Non-AI */}
             <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-2xl transition-colors">
               Membangun solusi digital end-to-end berstandar enterprise. Menggabungkan ketajaman analisis data bisnis, arsitektur backend tangguh, dan antarmuka pengguna yang intuitif.
             </p>
 
-            {/* Action Buttons dengan State Tekan & Efek Ripple */}
+            {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link
                 href="/projects"
@@ -491,23 +486,18 @@ public function submitClaim(Request $request) {
 
           </div>
 
-          {/* RIGHT COLUMN: CIRCULAR PORTAL WITH HUD & PROFILE CARD */}
+          {/* RIGHT COLUMN */}
           <div className="lg:col-span-5 relative flex items-center justify-center min-h-120 sm:min-h-140">
-            
-            {/* Ambient Radial Glow */}
             <div className="absolute w-100 sm:w-130 h-100 sm:h-130 bg-radial from-indigo-500/15 dark:from-indigo-500/25 via-sky-400/10 to-transparent rounded-full blur-[90px] pointer-events-none" />
 
-            {/* 1. Circular Backdrop Disc */}
             <div className="absolute w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-[#8fa499]/30 dark:bg-[#20332c]/50 backdrop-blur-md border border-white/50 dark:border-white/20 shadow-xl overflow-hidden pointer-events-none">
               <div className="absolute inset-0 bg-linear-to-b from-white/20 via-transparent to-black/20" />
             </div>
 
-            {/* 2. Outer Concentric Rings */}
             <div className="absolute w-84 sm:w-110 h-84 sm:h-110 rounded-full border border-slate-300/60 dark:border-white/15 pointer-events-none flex items-center justify-center">
               <div className="absolute inset-2 rounded-full border border-dashed border-indigo-400/30 dark:border-cyan-400/20 animate-spin-slow pointer-events-none" />
             </div>
 
-            {/* 3. Najwan Cutout Photo */}
             <div className="relative z-10 w-full max-w-95 sm:max-w-112.5 flex items-end justify-center pointer-events-none">
               <img
                 src="/najwan-removebg.png"
@@ -589,11 +579,11 @@ public function submitClaim(Request $request) {
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400" />
               PROFIL PROFESIONAL
             </div>
-            
+
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight uppercase leading-tight text-slate-900 dark:text-white">
               KOLABORASI <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-cyan-500">TEKNOLOGI, DATA & DESAIN</span>
             </h2>
-            
+
             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
               Sebagai talenta teknologi multi-disiplin, saya percaya bahwa produk digital terbaik lahir dari perpaduan kode pemrograman yang tangguh, pemahaman data bisnis yang akurat, serta antarmuka yang sangat mudah digunakan oleh manusia.
             </p>
@@ -611,7 +601,7 @@ public function submitClaim(Request $request) {
         </div>
       </section>
 
-      {/* ================= 6. RECENT PROJECT SHOWCASE (3 CARDS SIMETRIS) ================= */}
+      {/* ================= 6. RECENT PROJECT SHOWCASE ================= */}
       <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-slate-200/80 dark:border-white/10 transition-colors">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-4">
           <div className="space-y-3">
@@ -632,7 +622,6 @@ public function submitClaim(Request $request) {
           </Link>
         </div>
 
-        {/* 3 Columns Grid for Perfect Symmetry */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {projects.map((project, idx) => (
             <div 
@@ -641,18 +630,18 @@ public function submitClaim(Request $request) {
               tabIndex={0}
               onClick={(e) => { handleRipple(e); openModal(project); }}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openModal(project); }}
-              className="relative group rounded-3xl p-px transition-all duration-300 hover:-translate-y-1.5 flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50"
+              className="relative group rounded-3xl p-px transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.98] flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50"
             >
               <div className="absolute -inset-1 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `linear-gradient(135deg, ${project.glowColor}, transparent 70%)` }} />
               <div className="relative h-full flex flex-col justify-between rounded-3xl bg-white/80 dark:bg-[#080E1E]/90 backdrop-blur-2xl border border-slate-200 dark:border-white/10 group-hover:border-indigo-400/60 p-7 shadow-xl hover:shadow-[0_15px_40px_rgba(99,102,241,0.15)] transition-all duration-300 overflow-hidden">
                 <div className="absolute inset-0 bg-linear-to-b from-transparent via-white/10 to-transparent -translate-y-full group-hover:translate-y-full transition-transform duration-1000 ease-in-out pointer-events-none" />
-                
+
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 font-mono text-[11px] font-bold text-slate-500 dark:text-slate-400">0{idx + 1}</span>
                     <span className="px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-cyan-400 font-mono text-[10px] font-semibold uppercase tracking-wider">{project.badge}</span>
                   </div>
-                  
+
                   <div className="relative w-full h-48 rounded-2xl flex items-center justify-center p-4 my-2 overflow-hidden bg-slate-100/70 dark:bg-[#0B152B]/70 border border-slate-200 dark:border-white/5 group-hover:border-indigo-400/30 transition-all duration-300">
                     <div className={`absolute inset-0 bg-radial ${project.accent} opacity-30 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
                     <div className="relative z-10 w-32 h-32 rounded-2xl overflow-hidden bg-[#ffffff] flex items-center justify-center p-3 shadow-xl border border-white/20 group-hover:scale-105 transition-transform duration-300">
@@ -678,32 +667,31 @@ public function submitClaim(Request $request) {
         </div>
       </section>
 
-      {/* ================= 7. THREE PILLARS OF MASTERY (CLICKABLE & HRD-FRIENDLY) ================= */}
+      {/* ================= 7. THREE PILLARS OF MASTERY ================= */}
       <section ref={pillarsRef} className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-slate-200/80 dark:border-white/10 transition-colors">
         <div className={`space-y-3 mb-14 text-center max-w-3xl mx-auto transition-all duration-700 ease-out ${isPillarsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
           <div className="inline-block px-3.5 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-cyan-400 text-xs font-bold tracking-widest uppercase border border-indigo-500/30 dark:border-cyan-400/30">
             NILAI STRATEGIS
           </div>
-          
+
           <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-slate-900 dark:text-white">
             TIGA PILAR <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-cyan-400">KEAHLIAN UTAMA</span>
           </h2>
-          
+
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base font-normal leading-relaxed">
             Klik salah satu pilar di bawah untuk langsung meninjau portofolio spesifik terkait di halaman Projects.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          
-          {/* Pilar 1: Rekayasa Web & Sistem */}
+          {/* Pilar 1 */}
           <div
             role="button"
             tabIndex={0}
             onClick={(e) => { handleRipple(e); router.push("/projects"); }}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') router.push("/projects"); }}
             onMouseMove={handleBentoMouseMove}
-            className={`group relative overflow-hidden bg-white/80 dark:bg-[#0A162B]/80 border border-slate-200 dark:border-white/10 p-8 rounded-3xl hover:border-indigo-400/60 shadow-xl hover:shadow-[0_15px_40px_rgba(99,102,241,0.15)] transition-all duration-500 ease-out hover:-translate-y-2 backdrop-blur-xl flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50 ${isPillarsVisible ? "opacity-100 translate-y-0 delay-100" : "opacity-0 translate-y-10"}`}
+            className={`group relative overflow-hidden bg-white/80 dark:bg-[#0A162B]/80 border border-slate-200 dark:border-white/10 p-8 rounded-3xl hover:border-indigo-400/60 shadow-xl hover:shadow-[0_15px_40px_rgba(99,102,241,0.15)] transition-all duration-500 ease-out hover:-translate-y-2 active:scale-[0.98] backdrop-blur-xl flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50 ${isPillarsVisible ? "opacity-100 translate-y-0 delay-100" : "opacity-0 translate-y-10"}`}
           >
             <div className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl" style={{ background: `radial-gradient(500px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(99,102,241,0.12), transparent 40%)` }} />
             <div className="relative z-10 space-y-4">
@@ -715,11 +703,11 @@ public function submitClaim(Request $request) {
                   Full-Stack Engineering
                 </span>
               </div>
-              
+
               <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors">
                 1. Membangun Aplikasi Web Handal
               </h3>
-              
+
               <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
                 Saya merancang dan membangun situs web serta aplikasi dari nol hingga online. Fokus utamanya adalah kecepatan akses, keamanan data pengguna, dan kemudahan penggunaan di semua perangkat.
               </p>
@@ -740,14 +728,14 @@ public function submitClaim(Request $request) {
             </div>
           </div>
 
-          {/* Pilar 2: Analisis Data Bisnis */}
+          {/* Pilar 2 */}
           <div
             role="button"
             tabIndex={0}
             onClick={(e) => { handleRipple(e); router.push("/projects"); }}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') router.push("/projects"); }}
             onMouseMove={handleBentoMouseMove}
-            className={`group relative overflow-hidden bg-white/80 dark:bg-[#0A162B]/80 border border-slate-200 dark:border-white/10 p-8 rounded-3xl hover:border-indigo-400/60 shadow-xl hover:shadow-[0_15px_40px_rgba(99,102,241,0.15)] transition-all duration-500 ease-out hover:-translate-y-2 backdrop-blur-xl flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50 ${isPillarsVisible ? "opacity-100 translate-y-0 delay-200" : "opacity-0 translate-y-10"}`}
+            className={`group relative overflow-hidden bg-white/80 dark:bg-[#0A162B]/80 border border-slate-200 dark:border-white/10 p-8 rounded-3xl hover:border-indigo-400/60 shadow-xl hover:shadow-[0_15px_40px_rgba(99,102,241,0.15)] transition-all duration-500 ease-out hover:-translate-y-2 active:scale-[0.98] backdrop-blur-xl flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50 ${isPillarsVisible ? "opacity-100 translate-y-0 delay-200" : "opacity-0 translate-y-10"}`}
           >
             <div className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl" style={{ background: `radial-gradient(500px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(99,102,241,0.12), transparent 40%)` }} />
             <div className="relative z-10 space-y-4">
@@ -759,11 +747,11 @@ public function submitClaim(Request $request) {
                   Business Intelligence
                 </span>
               </div>
-              
+
               <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors">
                 2. Mengubah Data Menjadi Keputusan Bisnis
               </h3>
-              
+
               <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
                 Angka penjualan dan laporan operasional mentah diolah menjadi dashboard interaktif yang mudah dibaca oleh manajemen untuk memetakan peluang keuntungan dan menekan risiko kerugian.
               </p>
@@ -784,17 +772,17 @@ public function submitClaim(Request $request) {
             </div>
           </div>
 
-          {/* Pilar 3: Desain Pengalaman Pengguna */}
+          {/* Pilar 3 */}
           <div
             role="button"
             tabIndex={0}
             onClick={(e) => { handleRipple(e); router.push("/projects"); }}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') router.push("/projects"); }}
             onMouseMove={handleBentoMouseMove}
-            className={`group relative overflow-hidden bg-white/80 dark:bg-[#0A162B]/80 border border-slate-200 dark:border-white/10 p-8 rounded-3xl hover:border-indigo-400/60 shadow-xl hover:shadow-[0_15px_40px_rgba(99,102,241,0.15)] transition-all duration-500 ease-out hover:-translate-y-2 backdrop-blur-xl flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50 ${isPillarsVisible ? "opacity-100 translate-y-0 delay-300" : "opacity-0 translate-y-10"}`}
+            className={`group relative overflow-hidden bg-white/80 dark:bg-[#0A162B]/80 border border-slate-200 dark:border-white/10 p-8 rounded-3xl hover:border-indigo-400/60 shadow-xl hover:shadow-[0_15px_40px_rgba(99,102,241,0.15)] transition-all duration-500 ease-out hover:-translate-y-2 active:scale-[0.98] backdrop-blur-xl flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50 ${isPillarsVisible ? "opacity-100 translate-y-0 delay-300" : "opacity-0 translate-y-10"}`}
           >
             <div className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl" style={{ background: `radial-gradient(500px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(99,102,241,0.12), transparent 40%)` }} />
-            
+
             <div className="relative z-10 space-y-4">
               <div className="flex items-center justify-between">
                 <div className="w-14 h-14 rounded-2xl bg-indigo-50 dark:bg-[#0C1B33] flex items-center justify-center border border-indigo-100 dark:border-white/10 group-hover:bg-indigo-500/10 group-hover:border-indigo-400/40 transition-colors duration-300">
@@ -804,11 +792,11 @@ public function submitClaim(Request $request) {
                   UI/UX & Product Design
                 </span>
               </div>
-              
+
               <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors">
                 3. Merancang Tampilan yang Nyaman & Mudah
               </h3>
-              
+
               <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
                 Sebelum baris kode ditulis, setiap produk direncanakan tampilannya di Figma. Tujuannya agar aplikasi tidak hanya cantik dipandang, tetapi juga sangat intuitif dan disenangi oleh pengguna.
               </p>
@@ -828,7 +816,6 @@ public function submitClaim(Request $request) {
               <span className="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -851,7 +838,7 @@ public function submitClaim(Request $request) {
         </div>
       </section>
 
-      {/* ================= 9. ULTRA HIGH-TIER BENTO FOOTER ================= */}
+      {/* ================= 9. FOOTER ================= */}
       <footer className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 pt-4">
         <div className="relative rounded-[2.5rem] bg-white/80 dark:bg-[#070D1C]/90 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl p-8 sm:p-12 transition-all duration-300 overflow-hidden">
           <div className="absolute top-0 right-0 w-80 h-80 bg-radial from-cyan-400/10 dark:from-cyan-400/20 to-transparent blur-2xl pointer-events-none" />
@@ -977,53 +964,67 @@ public function submitClaim(Request $request) {
             onClick={closeModal}
             aria-hidden="true"
           />
-          
+
           <div 
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
-            className={`relative z-10 w-full max-w-4xl max-h-[90vh] bg-slate-900/95 border border-indigo-500/30 rounded-3xl shadow-[0_0_50px_rgba(99,102,241,0.2)] flex flex-col overflow-hidden transition-all duration-300 transform ${isModalOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
+            className={`relative z-10 w-full max-w-4xl max-h-[90vh] bg-slate-900/95 border border-indigo-500/30 rounded-3xl shadow-[0_0_50px_rgba(99,102,241,0.25)] flex flex-col overflow-hidden transition-all duration-300 transform ${isModalOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
           >
             {/* Header Bar */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/5 backdrop-blur-xl shrink-0">
-              <div className="flex flex-col gap-1">
+            <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-white/10 bg-white/5 backdrop-blur-xl shrink-0 gap-3">
+              <div className="flex flex-col gap-1 min-w-0 flex-1">
                 <span className="inline-block px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-cyan-400 font-mono text-[10px] font-semibold uppercase tracking-wider w-max">
                   {selectedProject.badge}
                 </span>
-                <h3 id="modal-title" className="text-lg sm:text-xl font-bold text-white leading-tight">
+                <h3 id="modal-title" className="text-base sm:text-xl font-bold text-white leading-tight truncate">
                   {selectedProject.title}
                 </h3>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="hidden sm:flex gap-2">
-                  <a href={selectedProject.link === "#" ? undefined : selectedProject.link} target="_blank" rel="noreferrer" onClick={handleRipple} className={`relative overflow-hidden px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-md active:scale-95 flex items-center gap-1.5 ${selectedProject.link === "#" ? "bg-slate-700 text-slate-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-500 text-white cursor-pointer"}`}>
-                    <span className="relative z-10">{selectedProject.demoLabel || "Live Demo"}</span>
-                    {selectedProject.demoLabel === "VIEW PDF" ? (
-                      <svg className="relative z-10 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
-                    ) : (
-                      <svg className="relative z-10 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                    )}
+
+              {/* Action Buttons: Tombol GitHub dihapus, Tombol Web Utama Selalu Tampil Responsif */}
+              <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                {selectedProject.demoLink && selectedProject.demoLink !== "#" ? (
+                  <a
+                    href={selectedProject.demoLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={handleRipple}
+                    className="relative overflow-hidden group/btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-linear-to-r from-blue-600 via-indigo-600 to-cyan-500 text-white font-black text-[11px] sm:text-xs uppercase tracking-widest transition-all duration-200 shadow-lg shadow-indigo-500/30 hover:shadow-cyan-500/50 hover:scale-[1.02] active:scale-95 active:translate-y-0.5 flex items-center gap-2 cursor-pointer border border-cyan-400/40"
+                  >
+                    <span className="absolute inset-0 bg-white/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    <span className="relative z-10">{selectedProject.demoLabel || "Kunjungi Web"}</span>
+                    <svg className="relative z-10 w-3.5 h-3.5 transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
                   </a>
-                  <a href={selectedProject.githubLink} target="_blank" rel="noreferrer" onClick={handleRipple} className="relative overflow-hidden px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/10 text-white rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 active:scale-95 flex items-center gap-1.5 cursor-pointer">
-                    <svg className="relative z-10 w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg>
-                    <span className="relative z-10">Code</span>
-                  </a>
-                </div>
-                <button onClick={closeModal} aria-label="Close modal" className="group w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-rose-500 hover:border-rose-500 transition-all duration-300">
-                  <svg className="w-4 h-4 text-slate-300 group-hover:text-white transform group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+                ) : (
+                  <span className="px-3.5 py-2 bg-slate-800/80 border border-white/10 text-slate-400 rounded-full text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider cursor-not-allowed">
+                    {selectedProject.demoLabel || "Segera Hadir"}
+                  </span>
+                )}
+
+                <button
+                  onClick={closeModal}
+                  aria-label="Close modal"
+                  className="group w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-rose-500 hover:border-rose-500 transition-all duration-300 shrink-0 cursor-pointer"
+                >
+                  <svg className="w-4 h-4 text-slate-300 group-hover:text-white transform group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
               </div>
             </div>
 
             {/* Interactive Tab Switcher */}
             <div className="flex items-center overflow-x-auto border-b border-white/10 bg-[#030712]/50 px-4 shrink-0 scrollbar-hide">
-              <button onClick={() => setActiveTab("showcase")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 ${activeTab === "showcase" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
+              <button onClick={() => setActiveTab("showcase")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 cursor-pointer ${activeTab === "showcase" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
                 01. Showcase
               </button>
-              <button onClick={() => setActiveTab("architecture")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 ${activeTab === "architecture" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
+              <button onClick={() => setActiveTab("architecture")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 cursor-pointer ${activeTab === "architecture" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
                 02. Architecture & Dataflow
               </button>
-              <button onClick={() => setActiveTab("benchmarks")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 ${activeTab === "benchmarks" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
+              <button onClick={() => setActiveTab("benchmarks")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 cursor-pointer ${activeTab === "benchmarks" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
                 03. Benchmarks & Impact
               </button>
             </div>
@@ -1039,7 +1040,7 @@ public function submitClaim(Request $request) {
                       <span className="bg-black/60 backdrop-blur border border-white/10 text-[9px] font-mono text-cyan-300 px-2 py-1 rounded shadow-xs">PROD_ENV_ACTIVE</span>
                     </div>
                   </div>
-                  
+
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
                       <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-2 border-l-2 border-rose-500 pl-2">Challenge Statement</h4>
@@ -1113,7 +1114,7 @@ public function submitClaim(Request $request) {
             <div className="px-6 py-4 border-t border-white/10 bg-slate-900 flex justify-end shrink-0">
               <button 
                 onClick={(e) => { handleRipple(e); closeModal(); }}
-                className="relative overflow-hidden px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-200 border border-white/10 active:scale-95 cursor-pointer"
+                className="relative overflow-hidden px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-200 border border-white/10 active:scale-95 active:translate-y-0.5 cursor-pointer"
               >
                 <span className="relative z-10">Back to Overview</span>
               </button>
