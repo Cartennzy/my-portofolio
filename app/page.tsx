@@ -490,13 +490,6 @@ public function submitClaim(Request $request) {
                 />
               </div>
             </div>
-
-            {/* Telemetry Badge */}
-            <div className="mt-6 flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-slate-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-              <span>v2.4.0 • HIGH TIER ENTERPRISE</span>
-            </div>
-
           </div>
         </div>
       )}
@@ -536,24 +529,6 @@ public function submitClaim(Request $request) {
           {/* LEFT COLUMN */}
           <div className="lg:col-span-7 space-y-7 text-left">
 
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-semibold tracking-wider uppercase mb-1">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                Siap Berkolaborasi & Masuk Tim
-              </div>
-
-              <h1 className="relative text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1] drop-shadow-sm group">
-                <span className="bg-linear-to-r from-slate-950 via-slate-600 to-slate-950 dark:from-white dark:via-slate-200 dark:to-white bg-clip-text text-transparent bg-size-[200%_auto] animate-text-shimmer inline-block">
-                  Najwan Muyassar
-                </span>
-                <span className="absolute -inset-x-2 -inset-y-1 bg-indigo-500/10 dark:bg-cyan-400/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 pointer-events-none rounded-full" />
-              </h1>
-
-              <h2 className="text-xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight hero-gradient-text drop-shadow-[0_0_20px_rgba(56,189,248,0.25)]">
-                Full-Stack Developer & UI UX Designer
-              </h2>
-            </div>
-
             <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-2xl transition-colors">
               Halo! Saya membangun aplikasi web yang cepat, stabil, dan nyaman dipakai pengguna nyata. Dari logika database di balik layar sampai detail tampilan antarmuka dan laporan analitik bisnis—semuanya saya kerjakan terstruktur agar siap dipakai di dunia nyata.
             </p>
@@ -586,23 +561,6 @@ public function submitClaim(Request $request) {
                 <span className="relative z-10 group-hover:translate-x-1 transition-transform">→</span>
               </Link>
             </div>
-
-            {/* Quick Metrics Bar */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/80 dark:border-white/10 max-w-lg">
-              <div>
-                <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">3.88</div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">IPK UBSI</div>
-              </div>
-              <div>
-                <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">50+</div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Proyek Tuntas</div>
-              </div>
-              <div>
-                <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">5+</div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Peran Tim & Lead</div>
-              </div>
-            </div>
-
           </div>
 
           {/* RIGHT COLUMN */}
@@ -690,41 +648,6 @@ public function submitClaim(Request $request) {
                   <span className="text-[10px] font-mono uppercase tracking-wider font-semibold">Tersedia untuk Kerja Sama</span>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-cyan-400 text-xs font-bold tracking-widest uppercase border border-indigo-500/30 dark:border-cyan-400/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400" />
-              TENTANG SAYA
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight uppercase leading-tight text-slate-900 dark:text-white">
-              Bukan Sekadar Bikin Kode Jalan, <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 via-blue-600 to-cyan-500">Tapi Bikin Solusi yang Berdampak</span>
-            </h2>
-
-            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
-              Bagi saya, aplikasi yang bagus itu bukan cuma bebas error, tapi juga bisa menyelesaikan masalah nyata dengan efisien. Saya memadukan logika teknis yang rapi, kemudahan bagi mata pengguna saat memakai produk, dan pembacaan data performa yang jelas untuk membantu strategi bisnis.
-            </p>
-
-            <div className="pt-4 flex flex-wrap gap-4">
-              <Link 
-                href="/about" 
-                onClick={handleRipple} 
-                className="group relative overflow-hidden inline-flex items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-7 py-3.5 rounded-full font-bold text-xs tracking-wider uppercase transition-all duration-200 shadow-md hover:-translate-y-1 hover:shadow-xl active:translate-y-0.5 active:scale-[0.96] cursor-pointer"
-              >
-                <span className="relative z-10">Kenal Lebih Dekat</span>
-                <span className="relative z-10 group-hover:translate-x-1.5 transition-transform duration-200">→</span>
-              </Link>
-              <Link 
-                href="/experience" 
-                onClick={handleRipple} 
-                className="group relative overflow-hidden inline-flex items-center gap-2 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/15 text-slate-800 dark:text-white px-7 py-3.5 rounded-full font-bold text-xs tracking-wider uppercase transition-all duration-200 hover:-translate-y-1 hover:shadow-lg active:translate-y-0.5 active:scale-[0.96] cursor-pointer border border-slate-200 dark:border-white/20"
-              >
-                <span className="relative z-10">Pengalaman & Track Record</span>
-                <span className="relative z-10 group-hover:translate-x-1.5 transition-transform duration-200">↗</span>
-              </Link>
             </div>
           </div>
         </div>
