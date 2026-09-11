@@ -10,10 +10,8 @@ export default function Home() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isPillarsVisible, setIsPillarsVisible] = useState(false);
 
-  // --- Splash Screen SaaS Engine State ---
+  // --- Splash Screen Clean High-Tier SaaS State ---
   const [isLoading, setIsLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState("INITIALIZING ENGINE...");
   const [isExiting, setIsExiting] = useState(false);
 
   // --- Modal State ---
@@ -25,45 +23,22 @@ export default function Home() {
   const mouseRef = useRef({ x: 0, y: 0 }); 
   const pillarsRef = useRef<HTMLElement | null>(null);
 
-  // 0. Splash Screen Loading Controller (High-Tier SaaS Production)
+  // Splash Screen Timer
   useEffect(() => {
-    // Jalankan loader counter
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-        const diff = Math.floor(Math.random() * 15) + 5;
-        return Math.min(prev + diff, 100);
-      });
-    }, 120);
+    const exitTimer = setTimeout(() => {
+      setIsExiting(true);
+      const closeTimer = setTimeout(() => {
+        setIsLoading(false);
+      }, 700);
+      return () => clearTimeout(closeTimer);
+    }, 1500);
 
-    return () => clearInterval(interval);
+    return () => clearTimeout(exitTimer);
   }, []);
-
-  useEffect(() => {
-    if (progress < 30) {
-      setStatusText("BOOTING CORE KERNEL & ASSETS...");
-    } else if (progress < 70) {
-      setStatusText("COMPILING NEURAL MESH & TELEMETRY...");
-    } else if (progress < 99) {
-      setStatusText("FINALIZING HIGH-TIER ENVIRONMENT...");
-    } else {
-      setStatusText("SYSTEM DEPLOYED • WELCOME");
-      const timeout = setTimeout(() => {
-        setIsExiting(true);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 700);
-      }, 400);
-      return () => clearTimeout(timeout);
-    }
-  }, [progress]);
 
   // 1. Interactive Starfield / Neural Mesh Particle Canvas Engine
   useEffect(() => {
-    if (isLoading) return; // tunggu splash selesai
+    if (isLoading) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -438,28 +413,24 @@ public function submitClaim(Request $request) {
   return (
     <div className="relative w-full min-h-screen bg-[#f8fafc] dark:bg-[#030712] text-slate-900 dark:text-slate-100 selection:bg-[#0D52E8] selection:text-white overflow-hidden font-sans transition-colors duration-300">
 
-      {/* ================= ULTRA HIGH-TIER SAAS SPLASH SCREEN ================= */}
+      {/* ================= CLEAN HIGH-TIER SAAS SPLASH SCREEN ================= */}
       {isLoading && (
         <div
-          className={`fixed inset-0 z-100 flex flex-col items-center justify-center bg-[#030712] transition-all duration-700 ease-in-out ${
+          className={`fixed inset-0 z-100 flex flex-col items-center justify-center bg-[#030712] transition-all duration-700 ease-in-out select-none ${
             isExiting ? "opacity-0 scale-105 pointer-events-none" : "opacity-100 scale-100"
           }`}
         >
-          {/* Ambient Background Blur Beam */}
-          <div className="absolute w-96 h-96 rounded-full bg-radial from-cyan-500/25 via-indigo-600/15 to-transparent blur-[120px] pointer-events-none animate-pulse" />
+          {/* Ambient Glow */}
+          <div className="absolute w-96 h-96 rounded-full bg-radial from-cyan-500/20 via-indigo-600/10 to-transparent blur-[120px] pointer-events-none animate-pulse" />
 
           <div className="relative z-10 flex flex-col items-center max-w-sm px-6 text-center">
             
-            {/* Logo Wrapper with Rotating Orbital Rings & Glow */}
-            <div className="relative flex items-center justify-center mb-8">
-              {/* Ring 1 - Outer Dashed Ring */}
+            {/* Logo Orbit Animation */}
+            <div className="relative flex items-center justify-center mb-6">
               <div className="absolute w-36 h-36 rounded-full border border-cyan-400/20 border-dashed animate-spin-slow pointer-events-none" />
-              {/* Ring 2 - Opposite Spinning Pulse Ring */}
               <div className="absolute w-32 h-32 rounded-full border-2 border-transparent border-t-indigo-500 border-b-cyan-400 animate-spin pointer-events-none" />
-              {/* Radial Halo Glow */}
               <div className="absolute -inset-4 bg-linear-to-r from-blue-600 to-cyan-400 rounded-full blur-xl opacity-60 animate-pulse pointer-events-none" />
 
-              {/* Logo Card */}
               <div className="relative w-24 h-24 rounded-2xl overflow-hidden bg-[#0A1224] border-2 border-cyan-400/50 shadow-[0_0_35px_rgba(6,182,212,0.4)] p-1 flex items-center justify-center">
                 <img
                   src="/logo-najwan.jpg"
@@ -469,27 +440,14 @@ public function submitClaim(Request $request) {
               </div>
             </div>
 
-            {/* Brand Title */}
+            {/* Brand Typography */}
             <h2 className="text-xl font-black uppercase tracking-[0.25em] text-white">
               NAJWAN <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-blue-400 to-indigo-400">MUYASSAR</span>
             </h2>
-            <p className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest mt-1">
+            <p className="text-[10px] font-mono text-cyan-400/80 uppercase tracking-widest mt-1.5">
               SYSTEM ARCHITECTURE & PORTFOLIO
             </p>
 
-            {/* Futuristic SaaS Progress Bar */}
-            <div className="w-64 mt-8 space-y-2">
-              <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
-                <span className="truncate pr-2">{statusText}</span>
-                <span className="font-bold text-cyan-400">{progress}%</span>
-              </div>
-              <div className="w-full h-1.5 rounded-full bg-white/10 overflow-hidden p-0.5 border border-white/10">
-                <div
-                  className="h-full rounded-full bg-linear-to-r from-blue-500 via-indigo-500 to-cyan-400 transition-all duration-150 ease-out shadow-[0_0_12px_rgba(56,189,248,0.8)]"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-            </div>
           </div>
         </div>
       )}
@@ -530,11 +488,6 @@ public function submitClaim(Request $request) {
           <div className="lg:col-span-7 space-y-7 text-left">
 
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-semibold tracking-wider uppercase mb-1">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                Siap Berkolaborasi & Masuk Tim
-              </div>
-
               <h1 className="relative text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1] drop-shadow-sm group">
                 <span className="bg-linear-to-r from-slate-950 via-slate-600 to-slate-950 dark:from-white dark:via-slate-200 dark:to-white bg-clip-text text-transparent bg-size-[200%_auto] animate-text-shimmer inline-block">
                   Najwan Muyassar
@@ -578,22 +531,6 @@ public function submitClaim(Request $request) {
                 <span className="relative z-10">Ajak Ngobrol Santai</span>
                 <span className="relative z-10 group-hover:translate-x-1 transition-transform">→</span>
               </Link>
-            </div>
-
-            {/* Quick Metrics Bar */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/80 dark:border-white/10 max-w-lg">
-              <div>
-                <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">3.88</div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">IPK UBSI</div>
-              </div>
-              <div>
-                <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">50+</div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Proyek Tuntas</div>
-              </div>
-              <div>
-                <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">5+</div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Peran Tim & Lead</div>
-              </div>
             </div>
 
           </div>
@@ -675,20 +612,12 @@ public function submitClaim(Request $request) {
                   />
                 ))}
                 <div className="absolute inset-0 bg-linear-to-t from-[#030712]/80 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute top-3 left-3 z-10 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white shadow-md">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                  </span>
-                  <span className="text-[10px] font-mono uppercase tracking-wider font-semibold">Tersedia untuk Kerja Sama</span>
-                </div>
               </div>
             </div>
           </div>
 
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-cyan-400 text-xs font-bold tracking-widest uppercase border border-indigo-500/30 dark:border-cyan-400/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400" />
               TENTANG SAYA
             </div>
 
@@ -710,14 +639,6 @@ public function submitClaim(Request $request) {
                 <span className="relative z-10">Kenal Lebih Dekat</span>
                 <span className="relative z-10 group-hover:translate-x-1.5 transition-transform duration-200">→</span>
               </Link>
-              <Link 
-                href="/experience" 
-                onClick={handleRipple} 
-                className="group relative overflow-hidden inline-flex items-center gap-2 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/15 text-slate-800 dark:text-white px-7 py-3.5 rounded-full font-bold text-xs tracking-wider uppercase transition-all duration-200 hover:-translate-y-1 hover:shadow-lg active:translate-y-0.5 active:scale-[0.96] cursor-pointer border border-slate-200 dark:border-white/20"
-              >
-                <span className="relative z-10">Pengalaman & Track Record</span>
-                <span className="relative z-10 group-hover:translate-x-1.5 transition-transform duration-200">↗</span>
-              </Link>
             </div>
           </div>
         </div>
@@ -728,7 +649,6 @@ public function submitClaim(Request $request) {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-4">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-cyan-400 text-xs font-mono font-semibold tracking-wider uppercase border border-indigo-500/20 dark:border-cyan-400/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400 animate-ping" />
               LIVE & TERUJI
             </div>
             <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-slate-900 dark:text-white">
@@ -996,24 +916,10 @@ public function submitClaim(Request $request) {
               <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed font-light max-w-md">
                 Mengembangkan website handal, dashboard analitik bisnis, dan antarmuka produk yang mempermudah urusan pengguna setiap hari.
               </p>
-              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-xs">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                </span>
-                <div className="flex items-center gap-2 font-mono text-[11px]">
-                  <span className="font-bold text-slate-800 dark:text-emerald-400">Seluruh Layanan Siap Pakai</span>
-                  <span className="text-slate-400 dark:text-slate-600">•</span>
-                  <span className="text-slate-500 dark:text-slate-400">99.98% Stabil</span>
-                </div>
-              </div>
             </div>
 
             <div className="md:col-span-2 space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400" />
-                <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Navigasi Cepat</h4>
-              </div>
+              <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Navigasi Cepat</h4>
               <ul className="space-y-3 text-xs font-medium text-slate-600 dark:text-slate-300">
                 <li><Link href="/" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>Halaman Utama</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
                 <li><Link href="/about" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>Biografi Lengkap</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
@@ -1024,31 +930,25 @@ public function submitClaim(Request $request) {
             </div>
 
             <div className="md:col-span-3 space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400" />
-                <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Aplikasi Unggulan</h4>
-              </div>
+              <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Aplikasi Unggulan</h4>
               <ul className="space-y-3 text-xs font-medium text-slate-600 dark:text-slate-300">
                 <li className="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5 hover:border-indigo-400/30 transition-colors cursor-pointer group">
-                  <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#0D52E8] group-hover:scale-125 transition-transform" /><span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-white transition-colors">VictoryArena</span></div>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-white transition-colors">VictoryArena</span>
                   <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">Sport Booking</span>
                 </li>
                 <li className="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5 hover:border-indigo-400/30 transition-colors cursor-pointer group">
-                  <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-emerald-500 group-hover:scale-125 transition-transform" /><span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-emerald-500 dark:group-hover:text-white transition-colors">MindHaven</span></div>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-emerald-500 dark:group-hover:text-white transition-colors">MindHaven</span>
                   <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">Mental Health</span>
                 </li>
                 <li className="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5 hover:border-indigo-400/30 transition-colors cursor-pointer group">
-                  <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-indigo-500 group-hover:scale-125 transition-transform" /><span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-indigo-500 dark:group-hover:text-white transition-colors">Petty Claim</span></div>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-indigo-500 dark:group-hover:text-white transition-colors">Petty Claim</span>
                   <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">Finance SaaS</span>
                 </li>
               </ul>
             </div>
 
             <div className="md:col-span-2 space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400" />
-                <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Koneksi Sosial</h4>
-              </div>
+              <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Koneksi Sosial</h4>
               <div className="flex flex-col gap-2.5">
                 <a href="https://github.com" target="_blank" rel="noreferrer" onClick={handleRipple} className="relative overflow-hidden flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-900 hover:text-white dark:bg-white/5 dark:hover:bg-white dark:hover:text-slate-900 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 transition-all duration-200 group shadow-xs active:scale-[0.96]">
                   <div className="relative z-10 flex items-center gap-2.5 text-xs font-semibold">
@@ -1077,10 +977,7 @@ public function submitClaim(Request $request) {
           </div>
 
           <div className="relative z-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
-              <p>© 2026 Najwan Muyassar. Dibuat dengan presisi dan performa tinggi.</p>
-            </div>
+            <p>© 2026 Najwan Muyassar. Dibuat dengan presisi dan performa tinggi.</p>
             <button 
               onClick={(e) => { handleRipple(e); scrollToTop(); }} 
               className="relative overflow-hidden inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-95 cursor-pointer shadow-xs group"
