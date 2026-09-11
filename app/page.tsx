@@ -420,12 +420,9 @@ public function submitClaim(Request $request) {
             isExiting ? "opacity-0 scale-105 pointer-events-none" : "opacity-100 scale-100"
           }`}
         >
-          {/* Ambient Glow */}
           <div className="absolute w-96 h-96 rounded-full bg-radial from-cyan-500/20 via-indigo-600/10 to-transparent blur-[120px] pointer-events-none animate-pulse" />
 
           <div className="relative z-10 flex flex-col items-center max-w-sm px-6 text-center">
-            
-            {/* Logo Orbit Animation */}
             <div className="relative flex items-center justify-center mb-6">
               <div className="absolute w-36 h-36 rounded-full border border-cyan-400/20 border-dashed animate-spin-slow pointer-events-none" />
               <div className="absolute w-32 h-32 rounded-full border-2 border-transparent border-t-indigo-500 border-b-cyan-400 animate-spin pointer-events-none" />
@@ -440,14 +437,12 @@ public function submitClaim(Request $request) {
               </div>
             </div>
 
-            {/* Brand Typography */}
             <h2 className="text-xl font-black uppercase tracking-[0.25em] text-white">
               NAJWAN <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-blue-400 to-indigo-400">MUYASSAR</span>
             </h2>
             <p className="text-[10px] font-mono text-cyan-400/80 uppercase tracking-widest mt-1.5">
               SYSTEM ARCHITECTURE & PORTFOLIO
             </p>
-
           </div>
         </div>
       )}
@@ -486,7 +481,6 @@ public function submitClaim(Request $request) {
 
           {/* LEFT COLUMN */}
           <div className="lg:col-span-7 space-y-7 text-left">
-
             <div className="space-y-2">
               <h1 className="relative text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1] drop-shadow-sm group">
                 <span className="bg-linear-to-r from-slate-950 via-slate-600 to-slate-950 dark:from-white dark:via-slate-200 dark:to-white bg-clip-text text-transparent bg-size-[200%_auto] animate-text-shimmer inline-block">
@@ -532,7 +526,6 @@ public function submitClaim(Request $request) {
                 <span className="relative z-10 group-hover:translate-x-1 transition-transform">→</span>
               </Link>
             </div>
-
           </div>
 
           {/* RIGHT COLUMN */}
@@ -622,12 +615,12 @@ public function submitClaim(Request $request) {
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight uppercase leading-tight text-slate-900 dark:text-white">
-              Bukan Sekadar Bikin Kode Jalan, <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 via-blue-600 to-cyan-500">Tapi Bikin Solusi yang Berdampak</span>
+              FOKUS PADA <br />
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 via-blue-600 to-cyan-500">HASIL & KUALITAS</span>
             </h2>
 
             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
-              Bagi saya, aplikasi yang bagus itu bukan cuma bebas error, tapi juga bisa menyelesaikan masalah nyata dengan efisien. Saya memadukan logika teknis yang rapi, kemudahan bagi mata pengguna saat memakai produk, dan pembacaan data performa yang jelas untuk membantu strategi bisnis.
+              Bagi saya, aplikasi yang baik adalah aplikasi yang menyelesaikan masalah nyata dengan efisien. Saya memadukan logika teknis yang rapi, tampilan antarmuka yang nyaman, dan data analitik yang jelas untuk mendukung kebutuhan Anda.
             </p>
 
             <div className="pt-4 flex flex-wrap gap-4">
@@ -649,10 +642,10 @@ public function submitClaim(Request $request) {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-4">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-cyan-400 text-xs font-mono font-semibold tracking-wider uppercase border border-indigo-500/20 dark:border-cyan-400/30">
-              LIVE & TERUJI
+              PORTFOLIO
             </div>
             <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-slate-900 dark:text-white">
-              KARYA PILIHAN <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 via-blue-600 to-cyan-400">TERBARU</span>
+              PROYEK <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 via-blue-600 to-cyan-400">PILIHAN</span>
             </h2>
           </div>
 
@@ -717,16 +710,15 @@ public function submitClaim(Request $request) {
       <section ref={pillarsRef} className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-slate-200/80 dark:border-white/10 transition-colors">
         <div className={`space-y-3 mb-14 text-center max-w-3xl mx-auto transition-all duration-700 ease-out ${isPillarsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
           <div className="inline-block px-3.5 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-cyan-400 text-xs font-bold tracking-widest uppercase border border-indigo-500/30 dark:border-cyan-400/30">
-            FOKUS KEAHLIAN SAYA
+            FOKUS KEAHLIAN
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-slate-900 dark:text-white">
-            TIGA BIDANG UTAMA <br />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-cyan-400">YANG SAYA KUASAI DENGAN MATANG</span>
+            KEAHLIAN <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-cyan-400">UTAMA</span>
           </h2>
 
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base font-normal leading-relaxed">
-            Klik kartu bidang di bawah ini untuk langsung mengecek karya nyata dan teknologi yang saya pakai.
+            Klik kartu bidang di bawah ini untuk langsung mengecek karya nyata dan teknologi yang saya gunakan.
           </p>
         </div>
 
@@ -990,173 +982,6 @@ public function submitClaim(Request $request) {
           </div>
         </div>
       </footer>
-
-      {/* ================= 10. INTERACTIVE PROJECT DETAIL MODAL ================= */}
-      {isModalOpen && selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-hidden">
-          <div 
-            className={`absolute inset-0 bg-black/80 backdrop-blur-md transition-opacity duration-300 ${isModalOpen ? 'opacity-100' : 'opacity-0'}`} 
-            onClick={closeModal}
-            aria-hidden="true"
-          />
-
-          <div 
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
-            className={`relative z-10 w-full max-w-4xl max-h-[90vh] bg-slate-900/95 border border-indigo-500/30 rounded-3xl shadow-[0_0_50px_rgba(99,102,241,0.25)] flex flex-col overflow-hidden transition-all duration-300 transform ${isModalOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
-          >
-            {/* Header Bar */}
-            <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-white/10 bg-white/5 backdrop-blur-xl shrink-0 gap-3">
-              <div className="flex flex-col gap-1 min-w-0 flex-1">
-                <span className="inline-block px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-cyan-400 font-mono text-[10px] font-semibold uppercase tracking-wider w-max">
-                  {selectedProject.badge}
-                </span>
-                <h3 id="modal-title" className="text-base sm:text-xl font-bold text-white leading-tight truncate">
-                  {selectedProject.title}
-                </h3>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-                {selectedProject.demoLink && selectedProject.demoLink !== "#" ? (
-                  <a
-                    href={selectedProject.demoLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={handleRipple}
-                    className="relative overflow-hidden group/btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-linear-to-r from-blue-600 via-indigo-600 to-cyan-500 text-white font-black text-[11px] sm:text-xs uppercase tracking-widest transition-all duration-200 shadow-lg shadow-indigo-500/30 hover:shadow-cyan-500/50 hover:scale-[1.02] active:scale-95 active:translate-y-0.5 flex items-center gap-2 cursor-pointer border border-cyan-400/40"
-                  >
-                    <span className="absolute inset-0 bg-white/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                    <span className="relative z-10">{selectedProject.demoLabel || "Kunjungi Web"}</span>
-                    <svg className="relative z-10 w-3.5 h-3.5 transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                ) : (
-                  <span className="px-3.5 py-2 bg-slate-800/80 border border-white/10 text-slate-400 rounded-full text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider cursor-not-allowed">
-                    {selectedProject.demoLabel || "Segera Hadir"}
-                  </span>
-                )}
-
-                <button
-                  onClick={closeModal}
-                  aria-label="Close modal"
-                  className="group w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-rose-500 hover:border-rose-500 transition-all duration-300 shrink-0 cursor-pointer"
-                >
-                  <svg className="w-4 h-4 text-slate-300 group-hover:text-white transform group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            {/* Interactive Tab Switcher */}
-            <div className="flex items-center overflow-x-auto border-b border-white/10 bg-[#030712]/50 px-4 shrink-0 scrollbar-hide">
-              <button onClick={() => setActiveTab("showcase")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 cursor-pointer ${activeTab === "showcase" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
-                01. Ringkasan Proyek
-              </button>
-              <button onClick={() => setActiveTab("architecture")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 cursor-pointer ${activeTab === "architecture" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
-                02. Struktur & Logika Kode
-              </button>
-              <button onClick={() => setActiveTab("benchmarks")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 cursor-pointer ${activeTab === "benchmarks" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
-                03. Metrik & Hasil Nyata
-              </button>
-            </div>
-
-            {/* Modal Body / Tab Content */}
-            <div className="flex-1 overflow-y-auto p-6 sm:p-8 custom-scrollbar">
-              {activeTab === "showcase" && (
-                <div className="animate-[fade-in_0.3s_ease-out]">
-                  <div className="w-full bg-slate-800/50 rounded-2xl border border-white/5 p-4 flex justify-center items-center h-48 sm:h-72 mb-8 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-radial from-cyan-500/10 to-transparent opacity-50"></div>
-                    <img src={selectedProject.image} alt={selectedProject.title} className="max-h-full max-w-full object-contain filter drop-shadow-2xl relative z-10" />
-                    <div className="absolute top-4 left-4 flex gap-2 z-10">
-                      <span className="bg-black/60 backdrop-blur border border-white/10 text-[9px] font-mono text-cyan-300 px-2 py-1 rounded shadow-xs">PRODUKSI AKTIF</span>
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                      <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-2 border-l-2 border-rose-500 pl-2">Tantangan Lapangan</h4>
-                      <p className="text-sm font-normal leading-relaxed text-slate-300">{selectedProject.challenge}</p>
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-2 border-l-2 border-emerald-500 pl-2">Solusi Rekayasa</h4>
-                      <p className="text-sm font-normal leading-relaxed text-slate-300">{selectedProject.solution}</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {activeTab === "architecture" && (
-                <div className="animate-[fade-in_0.3s_ease-out] space-y-8">
-                  <div>
-                    <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">Fitur Kunci & Arsitektur</h4>
-                    <ul className="space-y-3">
-                      {selectedProject.highlights.map((highlight: string, i: number) => (
-                        <li key={i} className="flex items-start gap-3 bg-white/5 p-3 rounded-xl border border-white/5">
-                          <svg className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                          <span className="text-sm text-slate-200">{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">Cuplikan Logika / Snippet Kode</h4>
-                    <div className="relative bg-[#030712] border border-white/10 rounded-xl overflow-hidden p-4">
-                      <div className="flex gap-1.5 mb-3">
-                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                      </div>
-                      <pre className="text-[11px] sm:text-xs font-mono text-cyan-100 overflow-x-auto">
-                        <code>{selectedProject.codeSnippet}</code>
-                      </pre>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {activeTab === "benchmarks" && (
-                <div className="animate-[fade-in_0.3s_ease-out]">
-                  <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">Capaian Performa Proyek</h4>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-                    {selectedProject.metrics.map((metric: any, i: number) => (
-                      <div key={i} className="bg-linear-to-br from-white/5 to-transparent border border-white/10 p-5 rounded-2xl flex flex-col justify-center items-center text-center shadow-lg hover:border-indigo-500/30 transition-colors">
-                        <span className="text-3xl font-black text-white drop-shadow-md">{metric.value}</span>
-                        <span className="text-[10px] uppercase font-mono text-cyan-400 tracking-wider mt-2">{metric.label}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div>
-                    <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">Teknologi Utama</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedProject.techStack.map((tech: string, i: number) => (
-                        <span key={i} className="px-3 py-1.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-200 text-xs font-mono rounded-lg">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Footer Bar */}
-            <div className="px-6 py-4 border-t border-white/10 bg-slate-900 flex justify-end shrink-0">
-              <button 
-                onClick={(e) => { handleRipple(e); closeModal(); }}
-                className="relative overflow-hidden px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-200 border border-white/10 active:scale-95 active:translate-y-0.5 cursor-pointer"
-              >
-                <span className="relative z-10">Tutup Tinjauan</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Global Style for Custom Scrollbars & Floater Animations */}
       <style dangerouslySetInnerHTML={{__html: `
