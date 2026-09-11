@@ -10,6 +10,12 @@ export default function Home() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isPillarsVisible, setIsPillarsVisible] = useState(false);
 
+  // --- Splash Screen SaaS Engine State ---
+  const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [statusText, setStatusText] = useState("INITIALIZING ENGINE...");
+  const [isExiting, setIsExiting] = useState(false);
+
   // --- Modal State ---
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
@@ -19,8 +25,45 @@ export default function Home() {
   const mouseRef = useRef({ x: 0, y: 0 }); 
   const pillarsRef = useRef<HTMLElement | null>(null);
 
+  // 0. Splash Screen Loading Controller (High-Tier SaaS Production)
+  useEffect(() => {
+    // Jalankan loader counter
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        const diff = Math.floor(Math.random() * 15) + 5;
+        return Math.min(prev + diff, 100);
+      });
+    }, 120);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (progress < 30) {
+      setStatusText("BOOTING CORE KERNEL & ASSETS...");
+    } else if (progress < 70) {
+      setStatusText("COMPILING NEURAL MESH & TELEMETRY...");
+    } else if (progress < 99) {
+      setStatusText("FINALIZING HIGH-TIER ENVIRONMENT...");
+    } else {
+      setStatusText("SYSTEM DEPLOYED • WELCOME");
+      const timeout = setTimeout(() => {
+        setIsExiting(true);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 700);
+      }, 400);
+      return () => clearTimeout(timeout);
+    }
+  }, [progress]);
+
   // 1. Interactive Starfield / Neural Mesh Particle Canvas Engine
   useEffect(() => {
+    if (isLoading) return; // tunggu splash selesai
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -137,7 +180,7 @@ export default function Home() {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isLoading]);
 
   // 2. Scroll Progress & Mouse Tracker
   useEffect(() => {
@@ -284,7 +327,6 @@ export default function Home() {
     { name: "Figma", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
   ];
 
-  // Upgraded Project Data Sesuai Halaman Projects
   const projects = [
     {
       id: "mental-health",
@@ -297,7 +339,7 @@ export default function Home() {
       scale: "scale-120",
       glowColor: "rgba(16, 185, 129, 0.45)",
       demoLink: "https://mind-haven-opal.vercel.app/",
-      demoLabel: "KUNJUNGI WEB",
+      demoLabel: "BUKA WEBSITE",
       challenge: "Menyediakan layanan konsultasi psikologis online yang mudah diakses, responsif, dan menjaga kerahasiaan data pribadi pasien.",
       solution: "Mengembangkan aplikasi web menggunakan Next.js dan Laravel untuk menangani antrean sesi, pencatatan rekam medis, serta fitur konsultasi interaktif.",
       techStack: ["Next.js", "Laravel", "PostgreSQL", "Tailwind CSS"],
@@ -332,7 +374,7 @@ export const handlePatientData = async (payload: PatientRecord) => {
       accent: "from-blue-600/30 via-indigo-600/15 to-transparent",
       desc: "Aplikasi pemesanan lapangan olahraga secara real-time untuk menghindari bentrok jadwal, lengkap dengan sistem konfirmasi pembayaran digital.",
       demoLink: "https://victory-arena-zeta.vercel.app/",
-      demoLabel: "KUNJUNGI WEB",
+      demoLabel: "BUKA WEBSITE",
       challenge: "Sering terjadi kesalahan pencatatan jadwal (double booking) pada jam operasional sibuk di akhir pekan.",
       solution: "Menerapkan sistem penguncian slot berbasis database transaksi otomatis dan pembaruan jadwal secara real-time di sisi antarmuka.",
       techStack: ["React", "Node.js", "PostgreSQL", "Express"],
@@ -369,7 +411,7 @@ const bookSlot = async (slotId, userId) => {
       accent: "from-amber-500/30 via-yellow-600/15 to-transparent",
       desc: "Proyek sistem pengelolaan kas kecil dan pengajuan klaim dana operasional yang sedang dalam tahap pengembangan aktif untuk digitalisasi proses keuangan perusahaan.",
       demoLink: "#",
-      demoLabel: "SEGERA HADIR",
+      demoLabel: "DALAM TAHAP RILIS",
       challenge: "Mengganti alur klaim manual berbasis kertas menjadi platform digital terintegrasi yang transparan dan mudah diaudit.",
       solution: "Merancang arsitektur multi-approval berjenjang dengan pencatatan log aktivitas otomatis dan penyimpanan bukti transaksi digital.",
       techStack: ["Laravel", "Vue.js", "MySQL", "Docker"],
@@ -395,6 +437,69 @@ public function submitClaim(Request $request) {
 
   return (
     <div className="relative w-full min-h-screen bg-[#f8fafc] dark:bg-[#030712] text-slate-900 dark:text-slate-100 selection:bg-[#0D52E8] selection:text-white overflow-hidden font-sans transition-colors duration-300">
+
+      {/* ================= ULTRA HIGH-TIER SAAS SPLASH SCREEN ================= */}
+      {isLoading && (
+        <div
+          className={`fixed inset-0 z-100 flex flex-col items-center justify-center bg-[#030712] transition-all duration-700 ease-in-out ${
+            isExiting ? "opacity-0 scale-105 pointer-events-none" : "opacity-100 scale-100"
+          }`}
+        >
+          {/* Ambient Background Blur Beam */}
+          <div className="absolute w-96 h-96 rounded-full bg-radial from-cyan-500/25 via-indigo-600/15 to-transparent blur-[120px] pointer-events-none animate-pulse" />
+
+          <div className="relative z-10 flex flex-col items-center max-w-sm px-6 text-center">
+            
+            {/* Logo Wrapper with Rotating Orbital Rings & Glow */}
+            <div className="relative flex items-center justify-center mb-8">
+              {/* Ring 1 - Outer Dashed Ring */}
+              <div className="absolute w-36 h-36 rounded-full border border-cyan-400/20 border-dashed animate-spin-slow pointer-events-none" />
+              {/* Ring 2 - Opposite Spinning Pulse Ring */}
+              <div className="absolute w-32 h-32 rounded-full border-2 border-transparent border-t-indigo-500 border-b-cyan-400 animate-spin pointer-events-none" />
+              {/* Radial Halo Glow */}
+              <div className="absolute -inset-4 bg-linear-to-r from-blue-600 to-cyan-400 rounded-full blur-xl opacity-60 animate-pulse pointer-events-none" />
+
+              {/* Logo Card */}
+              <div className="relative w-24 h-24 rounded-2xl overflow-hidden bg-[#0A1224] border-2 border-cyan-400/50 shadow-[0_0_35px_rgba(6,182,212,0.4)] p-1 flex items-center justify-center">
+                <img
+                  src="/logo-najwan.jpg"
+                  alt="Najwan Muyassar Logo"
+                  className="w-full h-full object-cover rounded-xl"
+                />
+              </div>
+            </div>
+
+            {/* Brand Title */}
+            <h2 className="text-xl font-black uppercase tracking-[0.25em] text-white">
+              NAJWAN <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-blue-400 to-indigo-400">MUYASSAR</span>
+            </h2>
+            <p className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest mt-1">
+              SYSTEM ARCHITECTURE & PORTFOLIO
+            </p>
+
+            {/* Futuristic SaaS Progress Bar */}
+            <div className="w-64 mt-8 space-y-2">
+              <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
+                <span className="truncate pr-2">{statusText}</span>
+                <span className="font-bold text-cyan-400">{progress}%</span>
+              </div>
+              <div className="w-full h-1.5 rounded-full bg-white/10 overflow-hidden p-0.5 border border-white/10">
+                <div
+                  className="h-full rounded-full bg-linear-to-r from-blue-500 via-indigo-500 to-cyan-400 transition-all duration-150 ease-out shadow-[0_0_12px_rgba(56,189,248,0.8)]"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Telemetry Badge */}
+            <div className="mt-6 flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-slate-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+              <span>v2.4.0 • HIGH TIER ENTERPRISE</span>
+            </div>
+
+          </div>
+        </div>
+      )}
 
       {/* ================= 0. TOP SCROLL PROGRESS BAR ================= */}
       <div className="fixed top-0 left-0 w-full h-0.75 z-50 pointer-events-none bg-slate-200/50 dark:bg-white/5">
@@ -432,6 +537,11 @@ public function submitClaim(Request $request) {
           <div className="lg:col-span-7 space-y-7 text-left">
 
             <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-semibold tracking-wider uppercase mb-1">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                Siap Berkolaborasi & Masuk Tim
+              </div>
+
               <h1 className="relative text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1] drop-shadow-sm group">
                 <span className="bg-linear-to-r from-slate-950 via-slate-600 to-slate-950 dark:from-white dark:via-slate-200 dark:to-white bg-clip-text text-transparent bg-size-[200%_auto] animate-text-shimmer inline-block">
                   Najwan Muyassar
@@ -445,7 +555,7 @@ public function submitClaim(Request $request) {
             </div>
 
             <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-2xl transition-colors">
-              Membangun solusi digital end-to-end berstandar enterprise. Menggabungkan ketajaman analisis data bisnis, arsitektur backend tangguh, dan antarmuka pengguna yang intuitif.
+              Halo! Saya membangun aplikasi web yang cepat, stabil, dan nyaman dipakai pengguna nyata. Dari logika database di balik layar sampai detail tampilan antarmuka dan laporan analitik bisnis—semuanya saya kerjakan terstruktur agar siap dipakai di dunia nyata.
             </p>
 
             {/* Action Buttons */}
@@ -453,12 +563,12 @@ public function submitClaim(Request $request) {
               <Link
                 href="/projects"
                 onClick={handleRipple}
-                className="group relative overflow-hidden inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs uppercase tracking-widest transition-all duration-200 shadow-xl shadow-black/10 dark:shadow-white/10 hover:shadow-2xl hover:shadow-indigo-500/25 hover:-translate-y-0.5 active:translate-y-1 active:scale-[0.96] active:shadow-inner cursor-pointer"
+                className="group relative overflow-hidden inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-linear-to-r from-indigo-600 via-blue-600 to-cyan-500 text-white font-black text-xs uppercase tracking-widest transition-all duration-200 shadow-xl shadow-indigo-500/25 hover:shadow-cyan-500/40 hover:-translate-y-1 active:translate-y-0.5 active:scale-[0.96] border border-cyan-400/30 cursor-pointer"
               >
-                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 dark:via-slate-900/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none" />
-                <span className="relative z-10">Jelajahi Portofolio</span>
+                <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none" />
+                <span className="relative z-10">Lihat Hasil Karya Saya</span>
                 <svg
-                  className="relative z-10 w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                  className="relative z-10 w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -466,21 +576,30 @@ public function submitClaim(Request $request) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7V17" />
                 </svg>
               </Link>
+
+              <Link
+                href="/contact"
+                onClick={handleRipple}
+                className="group relative overflow-hidden inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-slate-900/5 dark:bg-white/5 hover:bg-slate-900/10 dark:hover:bg-white/10 text-slate-800 dark:text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 border border-slate-300 dark:border-white/15 hover:border-indigo-400/50 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.96] cursor-pointer"
+              >
+                <span className="relative z-10">Ajak Ngobrol Santai</span>
+                <span className="relative z-10 group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
             </div>
 
             {/* Quick Metrics Bar */}
             <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/80 dark:border-white/10 max-w-lg">
               <div>
                 <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">3.88</div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">UBSI IPK</div>
+                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">IPK UBSI</div>
               </div>
               <div>
                 <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">50+</div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Project Selesai</div>
+                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Proyek Tuntas</div>
               </div>
               <div>
                 <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">5+</div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Kepemimpinan</div>
+                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Peran Tim & Lead</div>
               </div>
             </div>
 
@@ -568,7 +687,7 @@ public function submitClaim(Request $request) {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
-                  <span className="text-[10px] font-mono uppercase tracking-wider font-semibold">Available for Hire</span>
+                  <span className="text-[10px] font-mono uppercase tracking-wider font-semibold">Tersedia untuk Kerja Sama</span>
                 </div>
               </div>
             </div>
@@ -577,24 +696,34 @@ public function submitClaim(Request $request) {
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-cyan-400 text-xs font-bold tracking-widest uppercase border border-indigo-500/30 dark:border-cyan-400/30">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400" />
-              PROFIL PROFESIONAL
+              TENTANG SAYA
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight uppercase leading-tight text-slate-900 dark:text-white">
-              KOLABORASI <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-cyan-500">TEKNOLOGI, DATA & DESAIN</span>
+              Bukan Sekadar Bikin Kode Jalan, <br />
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 via-blue-600 to-cyan-500">Tapi Bikin Solusi yang Berdampak</span>
             </h2>
 
             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
-              Sebagai talenta teknologi multi-disiplin, saya percaya bahwa produk digital terbaik lahir dari perpaduan kode pemrograman yang tangguh, pemahaman data bisnis yang akurat, serta antarmuka yang sangat mudah digunakan oleh manusia.
+              Bagi saya, aplikasi yang bagus itu bukan cuma bebas error, tapi juga bisa menyelesaikan masalah nyata dengan efisien. Saya memadukan logika teknis yang rapi, kemudahan bagi mata pengguna saat memakai produk, dan pembacaan data performa yang jelas untuk membantu strategi bisnis.
             </p>
 
             <div className="pt-4 flex flex-wrap gap-4">
-              <Link href="/about" onClick={handleRipple} className="group relative overflow-hidden inline-flex items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-7 py-3.5 rounded-full font-bold text-xs tracking-wider uppercase transition-all duration-200 shadow-md hover:-translate-y-0.5 active:translate-y-1 active:scale-[0.96] cursor-pointer">
-                <span className="relative z-10">Baca Biografi Lengkap</span>
-                <span className="relative z-10 group-hover:translate-x-1 transition-transform">→</span>
+              <Link 
+                href="/about" 
+                onClick={handleRipple} 
+                className="group relative overflow-hidden inline-flex items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-7 py-3.5 rounded-full font-bold text-xs tracking-wider uppercase transition-all duration-200 shadow-md hover:-translate-y-1 hover:shadow-xl active:translate-y-0.5 active:scale-[0.96] cursor-pointer"
+              >
+                <span className="relative z-10">Kenal Lebih Dekat</span>
+                <span className="relative z-10 group-hover:translate-x-1.5 transition-transform duration-200">→</span>
               </Link>
-              <Link href="/experience" onClick={handleRipple} className="group relative overflow-hidden inline-flex items-center gap-2 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/15 text-slate-800 dark:text-white px-7 py-3.5 rounded-full font-bold text-xs tracking-wider uppercase transition-all duration-200 hover:-translate-y-0.5 active:translate-y-1 active:scale-[0.96] cursor-pointer border border-slate-200 dark:border-white/20">
-                <span className="relative z-10">Lihat Pengalaman Organisasi</span>
+              <Link 
+                href="/experience" 
+                onClick={handleRipple} 
+                className="group relative overflow-hidden inline-flex items-center gap-2 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/15 text-slate-800 dark:text-white px-7 py-3.5 rounded-full font-bold text-xs tracking-wider uppercase transition-all duration-200 hover:-translate-y-1 hover:shadow-lg active:translate-y-0.5 active:scale-[0.96] cursor-pointer border border-slate-200 dark:border-white/20"
+              >
+                <span className="relative z-10">Pengalaman & Track Record</span>
+                <span className="relative z-10 group-hover:translate-x-1.5 transition-transform duration-200">↗</span>
               </Link>
             </div>
           </div>
@@ -607,15 +736,19 @@ public function submitClaim(Request $request) {
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-cyan-400 text-xs font-mono font-semibold tracking-wider uppercase border border-indigo-500/20 dark:border-cyan-400/30">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400 animate-ping" />
-              PRODUCTION READY
+              LIVE & TERUJI
             </div>
             <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-slate-900 dark:text-white">
-              FEATURED <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 via-blue-600 to-cyan-400">DEPLOYMENTS</span>
+              KARYA PILIHAN <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 via-blue-600 to-cyan-400">TERBARU</span>
             </h2>
           </div>
 
-          <Link href="/projects" onClick={handleRipple} className="group relative overflow-hidden inline-flex items-center gap-2 px-6 py-3 rounded-full border border-slate-300 dark:border-white/15 hover:border-indigo-400/50 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition-all duration-200 bg-white dark:bg-[#0A1428]/80 backdrop-blur-xl shadow-xs hover:-translate-y-0.5 active:translate-y-1 active:scale-95">
-            <span className="relative z-10">Explore All Apps</span>
+          <Link 
+            href="/projects" 
+            onClick={handleRipple} 
+            className="group relative overflow-hidden inline-flex items-center gap-2 px-6 py-3 rounded-full border border-slate-300 dark:border-white/15 hover:border-indigo-400/50 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition-all duration-200 bg-white dark:bg-[#0A1428]/80 backdrop-blur-xl shadow-xs hover:-translate-y-1 hover:shadow-md active:translate-y-0.5 active:scale-95"
+          >
+            <span className="relative z-10">Lihat Semua Proyek</span>
             <svg className="relative z-10 w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7V17" />
             </svg>
@@ -630,7 +763,7 @@ public function submitClaim(Request $request) {
               tabIndex={0}
               onClick={(e) => { handleRipple(e); openModal(project); }}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openModal(project); }}
-              className="relative group rounded-3xl p-px transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.98] flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50"
+              className="relative group rounded-3xl p-px transition-all duration-300 hover:-translate-y-2 active:scale-[0.98] flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50"
             >
               <div className="absolute -inset-1 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `linear-gradient(135deg, ${project.glowColor}, transparent 70%)` }} />
               <div className="relative h-full flex flex-col justify-between rounded-3xl bg-white/80 dark:bg-[#080E1E]/90 backdrop-blur-2xl border border-slate-200 dark:border-white/10 group-hover:border-indigo-400/60 p-7 shadow-xl hover:shadow-[0_15px_40px_rgba(99,102,241,0.15)] transition-all duration-300 overflow-hidden">
@@ -653,10 +786,10 @@ public function submitClaim(Request $request) {
                   <p className="text-xs text-slate-500 dark:text-slate-400 font-normal mt-1.5 line-clamp-2 leading-relaxed">{project.category}</p>
                 </div>
 
-                {/* Tombol Inspect Details */}
+                {/* Tombol Bedah Rincian */}
                 <div className="pt-5 mt-6 border-t border-slate-100 dark:border-white/10">
                   <div className="w-full py-2.5 px-4 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 group-hover:bg-indigo-600 dark:group-hover:bg-cyan-400 group-hover:text-white dark:group-hover:text-slate-900 transition-colors shadow-sm">
-                    <span>Inspect Details</span>
+                    <span>Bedah Rincian Proyek</span>
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </div>
                 </div>
@@ -671,15 +804,16 @@ public function submitClaim(Request $request) {
       <section ref={pillarsRef} className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-slate-200/80 dark:border-white/10 transition-colors">
         <div className={`space-y-3 mb-14 text-center max-w-3xl mx-auto transition-all duration-700 ease-out ${isPillarsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
           <div className="inline-block px-3.5 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-cyan-400 text-xs font-bold tracking-widest uppercase border border-indigo-500/30 dark:border-cyan-400/30">
-            NILAI STRATEGIS
+            FOKUS KEAHLIAN SAYA
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-slate-900 dark:text-white">
-            TIGA PILAR <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-cyan-400">KEAHLIAN UTAMA</span>
+            TIGA BIDANG UTAMA <br />
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-cyan-400">YANG SAYA KUASAI DENGAN MATANG</span>
           </h2>
 
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base font-normal leading-relaxed">
-            Klik salah satu pilar di bawah untuk langsung meninjau portofolio spesifik terkait di halaman Projects.
+            Klik kartu bidang di bawah ini untuk langsung mengecek karya nyata dan teknologi yang saya pakai.
           </p>
         </div>
 
@@ -705,25 +839,25 @@ public function submitClaim(Request $request) {
               </div>
 
               <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors">
-                1. Membangun Aplikasi Web Handal
+                1. Pembuatan Web & Aplikasi Stabil
               </h3>
 
               <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
-                Saya merancang dan membangun situs web serta aplikasi dari nol hingga online. Fokus utamanya adalah kecepatan akses, keamanan data pengguna, dan kemudahan penggunaan di semua perangkat.
+                Saya membuat aplikasi web yang siap pakai dari frontend sampai backend. Antarmuka cepat diakses, database aman, dan sistem siap menampung lonjakan pengguna tanpa lag.
               </p>
 
               <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#030712] border border-slate-200/80 dark:border-white/5 space-y-2 text-xs font-medium text-slate-700 dark:text-slate-300">
                 <div className="flex items-center gap-2">
-                  <span className="text-emerald-500 font-bold">✓</span> <span className="font-semibold">Performa Super Cepat</span> (Next.js & React)
+                  <span className="text-emerald-500 font-bold">✓</span> <span className="font-semibold">Performa Kilat & SEO Ramah</span> (Next.js & React)
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-emerald-500 font-bold">✓</span> <span className="font-semibold">Keamanan Database</span> (PostgreSQL & Laravel)
+                  <span className="text-emerald-500 font-bold">✓</span> <span className="font-semibold">Arsitektur Data Aman</span> (Laravel & PostgreSQL)
                 </div>
               </div>
             </div>
 
             <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs text-indigo-600 dark:text-cyan-400 font-bold">
-              <span>Lihat Project Coding</span>
+              <span>Buka Portofolio Web App</span>
               <span className="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
             </div>
           </div>
@@ -749,25 +883,25 @@ public function submitClaim(Request $request) {
               </div>
 
               <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors">
-                2. Mengubah Data Menjadi Keputusan Bisnis
+                2. Analisis Data & Dashboard Manajemen
               </h3>
 
               <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
-                Angka penjualan dan laporan operasional mentah diolah menjadi dashboard interaktif yang mudah dibaca oleh manajemen untuk memetakan peluang keuntungan dan menekan risiko kerugian.
+                Data mentah dan laporan tabel yang panjang diubah menjadi dashboard visual interaktif yang langsung memberi insight: produk mana yang untung, pos mana yang boros, dan arah tren ke depan.
               </p>
 
               <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#030712] border border-slate-200/80 dark:border-white/5 space-y-2 text-xs font-medium text-slate-700 dark:text-slate-300">
                 <div className="flex items-center gap-2">
-                  <span className="text-amber-500 font-bold">✓</span> <span className="font-semibold">Visualisasi Interaktif</span> (Microsoft Power BI)
+                  <span className="text-amber-500 font-bold">✓</span> <span className="font-semibold">Dashboard Eksekutif Cepat Baca</span> (Microsoft Power BI)
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-amber-500 font-bold">✓</span> <span className="font-semibold">Prediksi Tren & Metrik</span> (SQL & Data Modeling)
+                  <span className="text-amber-500 font-bold">✓</span> <span className="font-semibold">Pengolahan & Rumus Metrik</span> (SQL & DAX Modeling)
                 </div>
               </div>
             </div>
 
             <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs text-indigo-600 dark:text-cyan-400 font-bold">
-              <span>Lihat Project Power BI</span>
+              <span>Buka Sampel Dashboard Power BI</span>
               <span className="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
             </div>
           </div>
@@ -794,25 +928,25 @@ public function submitClaim(Request $request) {
               </div>
 
               <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors">
-                3. Merancang Tampilan yang Nyaman & Mudah
+                3. Desain Antarmuka yang Nyaman Dipakai
               </h3>
 
               <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
-                Sebelum baris kode ditulis, setiap produk direncanakan tampilannya di Figma. Tujuannya agar aplikasi tidak hanya cantik dipandang, tetapi juga sangat intuitif dan disenangi oleh pengguna.
+                Sebelum mulai coding, alur aplikasi dirancang matang di Figma. Hasilnya adalah tombol yang mudah ditemukan, tata letak yang ramah pemula, dan alur transaksi yang tidak membingungkan.
               </p>
 
               <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#030712] border border-slate-200/80 dark:border-white/5 space-y-2 text-xs font-medium text-slate-700 dark:text-slate-300">
                 <div className="flex items-center gap-2">
-                  <span className="text-blue-500 font-bold">✓</span> <span className="font-semibold">Desain Konsisten</span> (Design Systems & Tokens)
+                  <span className="text-blue-500 font-bold">✓</span> <span className="font-semibold">Standar Desain Rapi & Konsisten</span> (Design Tokens)
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-blue-500 font-bold">✓</span> <span className="font-semibold">Prototipe Interaktif</span> (Figma High-Fidelity)
+                  <span className="text-blue-500 font-bold">✓</span> <span className="font-semibold">Bisa Diklik & Dicoba Langsung</span> (Figma Prototype)
                 </div>
               </div>
             </div>
 
             <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs text-indigo-600 dark:text-cyan-400 font-bold">
-              <span>Lihat Project UI/UX</span>
+              <span>Buka Prototipe Figma UI/UX</span>
               <span className="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
             </div>
           </div>
@@ -821,19 +955,27 @@ public function submitClaim(Request $request) {
 
       {/* ================= 8. BOTTOM CTA ================= */}
       <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-12 mb-8">
-        <div className="p-8 sm:p-12 rounded-3xl bg-linear-to-r from-indigo-500/10 via-blue-500/10 to-transparent border border-indigo-400/30 flex flex-col md:flex-row items-center justify-between gap-8 backdrop-blur-2xl shadow-xl hover:shadow-[0_15px_40px_rgba(99,102,241,0.2)] transition-shadow duration-500">
-          <div className="space-y-2 text-center md:text-left">
+        <div className="p-8 sm:p-12 rounded-3xl bg-linear-to-r from-indigo-500/15 via-blue-500/10 to-cyan-500/10 border border-indigo-400/40 flex flex-col md:flex-row items-center justify-between gap-8 backdrop-blur-2xl shadow-xl hover:shadow-[0_15px_40px_rgba(99,102,241,0.25)] transition-shadow duration-500">
+          <div className="space-y-3 text-center md:text-left">
+            <span className="inline-block px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-600 dark:text-cyan-300 font-mono text-xs font-bold uppercase tracking-wider">
+              Langkah Berikutnya
+            </span>
             <h3 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-slate-900 dark:text-white">
-              Tertarik Berdiskusi dengan Saya?
+              Punya Rencana Proyek atau Posisi yang Cocok?
             </h3>
-            <p className="text-slate-600 dark:text-slate-300 text-sm font-normal">
-              Saya siap bergabung untuk memberikan kontribusi nyata di perusahaan Anda. Mari jadwalkan sesi wawancara.
+            <p className="text-slate-600 dark:text-slate-300 text-sm font-normal max-w-xl">
+              Saya senang berdiskusi tentang bagaimana teknologi dan data bisa mempercepat target tim Anda. Mari jadwalkan obrolan singkat atau sesi wawancara.
             </p>
           </div>
 
-          <Link href="/contact" onClick={handleRipple} className="group relative overflow-hidden shrink-0 px-8 py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold tracking-wider uppercase transition-all duration-200 shadow-lg hover:-translate-y-0.5 active:translate-y-1 active:scale-[0.96] flex items-center gap-2 cursor-pointer">
-            <span className="relative z-10">Hubungi / Jadwalkan Interview</span>
-            <span className="relative z-10 group-hover:translate-x-1 transition-transform">→</span>
+          <Link 
+            href="/contact" 
+            onClick={handleRipple} 
+            className="group relative overflow-hidden shrink-0 px-8 py-4 rounded-full bg-linear-to-r from-slate-950 to-indigo-950 dark:from-white dark:to-slate-200 text-white dark:text-slate-900 text-xs font-black tracking-widest uppercase transition-all duration-200 shadow-xl shadow-indigo-500/20 hover:shadow-cyan-500/30 hover:-translate-y-1 active:translate-y-0.5 active:scale-[0.96] flex items-center gap-3 cursor-pointer border border-cyan-400/30"
+          >
+            <div className="absolute inset-0 bg-white/20 dark:bg-black/10 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none" />
+            <span className="relative z-10">Hubungi Saya Sekarang</span>
+            <span className="relative z-10 group-hover:translate-x-1.5 transition-transform duration-200">→</span>
           </Link>
         </div>
       </section>
@@ -859,7 +1001,7 @@ public function submitClaim(Request $request) {
                 </div>
               </div>
               <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed font-light max-w-md">
-                Mengembangkan aplikasi web modern, visualisasi data analitik bisnis, dan perancangan desain antarmuka profesional untuk ekosistem digital masa kini.
+                Mengembangkan website handal, dashboard analitik bisnis, dan antarmuka produk yang mempermudah urusan pengguna setiap hari.
               </p>
               <div className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-xs">
                 <span className="relative flex h-2.5 w-2.5">
@@ -867,9 +1009,9 @@ public function submitClaim(Request $request) {
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                 </span>
                 <div className="flex items-center gap-2 font-mono text-[11px]">
-                  <span className="font-bold text-slate-800 dark:text-emerald-400">All Systems Operational</span>
+                  <span className="font-bold text-slate-800 dark:text-emerald-400">Seluruh Layanan Siap Pakai</span>
                   <span className="text-slate-400 dark:text-slate-600">•</span>
-                  <span className="text-slate-500 dark:text-slate-400">99.98% Uptime</span>
+                  <span className="text-slate-500 dark:text-slate-400">99.98% Stabil</span>
                 </div>
               </div>
             </div>
@@ -877,21 +1019,21 @@ public function submitClaim(Request $request) {
             <div className="md:col-span-2 space-y-4">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400" />
-                <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Explore</h4>
+                <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Navigasi Cepat</h4>
               </div>
               <ul className="space-y-3 text-xs font-medium text-slate-600 dark:text-slate-300">
-                <li><Link href="/" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>Home Canvas</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
-                <li><Link href="/about" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>About Biography</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
-                <li><Link href="/projects" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>Featured Works</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
-                <li><Link href="/skills" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>Tech Architecture</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
-                <li><Link href="/experience" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>Experience Track</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
+                <li><Link href="/" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>Halaman Utama</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
+                <li><Link href="/about" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>Biografi Lengkap</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
+                <li><Link href="/projects" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>Galeri Proyek</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
+                <li><Link href="/skills" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>Keahlian & Tech Stack</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
+                <li><Link href="/experience" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>Pengalaman Kerja</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
               </ul>
             </div>
 
             <div className="md:col-span-3 space-y-4">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400" />
-                <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Production Apps</h4>
+                <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Aplikasi Unggulan</h4>
               </div>
               <ul className="space-y-3 text-xs font-medium text-slate-600 dark:text-slate-300">
                 <li className="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5 hover:border-indigo-400/30 transition-colors cursor-pointer group">
@@ -912,7 +1054,7 @@ public function submitClaim(Request $request) {
             <div className="md:col-span-2 space-y-4">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400" />
-                <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Network</h4>
+                <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Koneksi Sosial</h4>
               </div>
               <div className="flex flex-col gap-2.5">
                 <a href="https://github.com" target="_blank" rel="noreferrer" onClick={handleRipple} className="relative overflow-hidden flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-900 hover:text-white dark:bg-white/5 dark:hover:bg-white dark:hover:text-slate-900 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 transition-all duration-200 group shadow-xs active:scale-[0.96]">
@@ -944,10 +1086,13 @@ public function submitClaim(Request $request) {
           <div className="relative z-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
-              <p>© 2026 Najwan Muyassar. All rights reserved.</p>
+              <p>© 2026 Najwan Muyassar. Dibuat dengan presisi dan performa tinggi.</p>
             </div>
-            <button onClick={(e) => { handleRipple(e); scrollToTop(); }} className="relative overflow-hidden inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition-all duration-200 active:scale-95 cursor-pointer shadow-xs group">
-              <span className="relative z-10">Back to Top</span>
+            <button 
+              onClick={(e) => { handleRipple(e); scrollToTop(); }} 
+              className="relative overflow-hidden inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-95 cursor-pointer shadow-xs group"
+            >
+              <span className="relative z-10">Kembali ke Atas</span>
               <svg className="relative z-10 w-3.5 h-3.5 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
               </svg>
@@ -982,7 +1127,7 @@ public function submitClaim(Request $request) {
                 </h3>
               </div>
 
-              {/* Action Buttons: Tombol GitHub dihapus, Tombol Web Utama Selalu Tampil Responsif */}
+              {/* Action Buttons */}
               <div className="flex items-center gap-2 sm:gap-3 shrink-0">
                 {selectedProject.demoLink && selectedProject.demoLink !== "#" ? (
                   <a
@@ -1019,13 +1164,13 @@ public function submitClaim(Request $request) {
             {/* Interactive Tab Switcher */}
             <div className="flex items-center overflow-x-auto border-b border-white/10 bg-[#030712]/50 px-4 shrink-0 scrollbar-hide">
               <button onClick={() => setActiveTab("showcase")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 cursor-pointer ${activeTab === "showcase" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
-                01. Showcase
+                01. Ringkasan Proyek
               </button>
               <button onClick={() => setActiveTab("architecture")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 cursor-pointer ${activeTab === "architecture" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
-                02. Architecture & Dataflow
+                02. Struktur & Logika Kode
               </button>
               <button onClick={() => setActiveTab("benchmarks")} className={`whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors border-b-2 cursor-pointer ${activeTab === "benchmarks" ? "text-cyan-400 border-cyan-400" : "text-slate-500 border-transparent hover:text-slate-300"}`}>
-                03. Benchmarks & Impact
+                03. Metrik & Hasil Nyata
               </button>
             </div>
 
@@ -1037,17 +1182,17 @@ public function submitClaim(Request $request) {
                     <div className="absolute inset-0 bg-radial from-cyan-500/10 to-transparent opacity-50"></div>
                     <img src={selectedProject.image} alt={selectedProject.title} className="max-h-full max-w-full object-contain filter drop-shadow-2xl relative z-10" />
                     <div className="absolute top-4 left-4 flex gap-2 z-10">
-                      <span className="bg-black/60 backdrop-blur border border-white/10 text-[9px] font-mono text-cyan-300 px-2 py-1 rounded shadow-xs">PROD_ENV_ACTIVE</span>
+                      <span className="bg-black/60 backdrop-blur border border-white/10 text-[9px] font-mono text-cyan-300 px-2 py-1 rounded shadow-xs">PRODUKSI AKTIF</span>
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
-                      <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-2 border-l-2 border-rose-500 pl-2">Challenge Statement</h4>
+                      <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-2 border-l-2 border-rose-500 pl-2">Tantangan Lapangan</h4>
                       <p className="text-sm font-normal leading-relaxed text-slate-300">{selectedProject.challenge}</p>
                     </div>
                     <div>
-                      <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-2 border-l-2 border-emerald-500 pl-2">Engineering Solution</h4>
+                      <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-2 border-l-2 border-emerald-500 pl-2">Solusi Rekayasa</h4>
                       <p className="text-sm font-normal leading-relaxed text-slate-300">{selectedProject.solution}</p>
                     </div>
                   </div>
@@ -1057,7 +1202,7 @@ public function submitClaim(Request $request) {
               {activeTab === "architecture" && (
                 <div className="animate-[fade-in_0.3s_ease-out] space-y-8">
                   <div>
-                    <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">Architectural Highlights</h4>
+                    <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">Fitur Kunci & Arsitektur</h4>
                     <ul className="space-y-3">
                       {selectedProject.highlights.map((highlight: string, i: number) => (
                         <li key={i} className="flex items-start gap-3 bg-white/5 p-3 rounded-xl border border-white/5">
@@ -1069,7 +1214,7 @@ public function submitClaim(Request $request) {
                   </div>
 
                   <div>
-                    <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">Pipeline / Pseudo-code Snippet</h4>
+                    <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">Cuplikan Logika / Snippet Kode</h4>
                     <div className="relative bg-[#030712] border border-white/10 rounded-xl overflow-hidden p-4">
                       <div className="flex gap-1.5 mb-3">
                         <span className="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
@@ -1086,7 +1231,7 @@ public function submitClaim(Request $request) {
 
               {activeTab === "benchmarks" && (
                 <div className="animate-[fade-in_0.3s_ease-out]">
-                  <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">Key Metric Highlight</h4>
+                  <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">Capaian Performa Proyek</h4>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
                     {selectedProject.metrics.map((metric: any, i: number) => (
                       <div key={i} className="bg-linear-to-br from-white/5 to-transparent border border-white/10 p-5 rounded-2xl flex flex-col justify-center items-center text-center shadow-lg hover:border-indigo-500/30 transition-colors">
@@ -1097,7 +1242,7 @@ public function submitClaim(Request $request) {
                   </div>
 
                   <div>
-                    <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">Core Tech Stack</h4>
+                    <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">Teknologi Utama</h4>
                     <div className="flex flex-wrap gap-2">
                       {selectedProject.techStack.map((tech: string, i: number) => (
                         <span key={i} className="px-3 py-1.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-200 text-xs font-mono rounded-lg">
@@ -1116,7 +1261,7 @@ public function submitClaim(Request $request) {
                 onClick={(e) => { handleRipple(e); closeModal(); }}
                 className="relative overflow-hidden px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-200 border border-white/10 active:scale-95 active:translate-y-0.5 cursor-pointer"
               >
-                <span className="relative z-10">Back to Overview</span>
+                <span className="relative z-10">Tutup Tinjauan</span>
               </button>
             </div>
           </div>
