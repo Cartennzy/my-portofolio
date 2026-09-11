@@ -382,12 +382,11 @@ export default function SkillsPage() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000006_1px,transparent_1px),linear-gradient(to_bottom,#00000006_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-size-[48px_48px] pointer-events-none" />
       </div>
 
-      {/* ================= 3. EDITORIAL MINIMALIST HERO (PROPORSI SEMPURNA) ================= */}
+      {/* ================= 3. EDITORIAL MINIMALIST HERO ================= */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-8 pt-28 pb-10 sm:pt-36 sm:pb-14 text-center">
         
         {/* Pill Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-200/70 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 backdrop-blur-md shadow-xs mb-5">
-          <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
           <span className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-slate-700 dark:text-slate-300">
             CORE COMPETENCIES & EXPERTISE
           </span>
@@ -418,7 +417,7 @@ export default function SkillsPage() {
               <button
                 key={tab.key}
                 onClick={(e) => { handleRipple(e); setActiveFilter(tab.key); }}
-                className={`relative overflow-hidden px-4 sm:px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                className={`relative overflow-hidden px-4 sm:px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap active:scale-95 active:translate-y-0.5 ${
                   activeFilter === tab.key 
                     ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-md scale-[1.02]" 
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
@@ -461,7 +460,6 @@ export default function SkillsPage() {
 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-6">
-                    {/* Container Logo: p-1 untuk Microsoft agar pas & seimbang */}
                     <div className={`w-14 h-14 rounded-2xl bg-slate-50 dark:bg-[#0B152B] border border-slate-200 dark:border-white/10 flex items-center justify-center group-hover:scale-105 transition-transform shadow-inner overflow-hidden ${
                       isMicrosoft ? "p-1" : "p-2.5"
                     }`}>
@@ -566,7 +564,7 @@ export default function SkillsPage() {
           <Link
             href="/contact"
             onClick={handleRipple}
-            className="group relative overflow-hidden shrink-0 px-8 py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold tracking-wider uppercase transition-all duration-200 shadow-lg hover:-translate-y-0.5 active:translate-y-1 active:scale-[0.96] flex items-center gap-2 cursor-pointer"
+            className="group relative overflow-hidden shrink-0 px-8 py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold tracking-wider uppercase transition-all duration-200 shadow-lg hover:-translate-y-1 active:translate-y-0.5 active:scale-[0.96] flex items-center gap-2 cursor-pointer border border-slate-300 dark:border-white/20"
           >
             <span className="relative z-10">Start Project</span>
             <span className="relative z-10 group-hover:translate-x-1 transition-transform">→</span>
@@ -597,24 +595,10 @@ export default function SkillsPage() {
               <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed font-normal max-w-md">
                 Mengembangkan aplikasi web modern, visualisasi data analitik bisnis, dan perancangan desain antarmuka profesional untuk ekosistem digital masa kini.
               </p>
-              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-xs">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                </span>
-                <div className="flex items-center gap-2 font-mono text-[11px]">
-                  <span className="font-bold text-slate-800 dark:text-emerald-400">All Systems Operational</span>
-                  <span className="text-slate-400 dark:text-slate-600">•</span>
-                  <span className="text-slate-500 dark:text-slate-400">99.98% Uptime</span>
-                </div>
-              </div>
             </div>
 
             <div className="md:col-span-2 space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400" />
-                <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Explore</h4>
-              </div>
+              <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Explore</h4>
               <ul className="space-y-3 text-xs font-medium text-slate-600 dark:text-slate-300">
                 <li><Link href="/" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>Home Canvas</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
                 <li><Link href="/about" className="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors flex items-center justify-between group"><span>About Biography</span><span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span></Link></li>
@@ -625,35 +609,25 @@ export default function SkillsPage() {
             </div>
 
             <div className="md:col-span-3 space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400" />
-                <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Production Apps</h4>
-              </div>
+              <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Production Apps</h4>
               <ul className="space-y-3 text-xs font-medium text-slate-600 dark:text-slate-300">
                 <li className="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5 hover:border-indigo-400/30 transition-colors cursor-pointer group">
-                  <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#0D52E8] group-hover:scale-125 transition-transform" /><span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-white transition-colors">VictoryArena</span></div>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-white transition-colors">VictoryArena</span>
                   <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">Sport Booking</span>
                 </li>
                 <li className="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5 hover:border-indigo-400/30 transition-colors cursor-pointer group">
-                  <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-cyan-500 group-hover:scale-125 transition-transform" /><span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-cyan-500 dark:group-hover:text-white transition-colors">Toko Online</span></div>
-                  <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">E-Commerce</span>
-                </li>
-                <li className="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5 hover:border-indigo-400/30 transition-colors cursor-pointer group">
-                  <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-emerald-500 group-hover:scale-125 transition-transform" /><span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-emerald-500 dark:group-hover:text-white transition-colors">MindHaven</span></div>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-emerald-500 dark:group-hover:text-white transition-colors">MindHaven</span>
                   <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">Mental Health</span>
                 </li>
                 <li className="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5 hover:border-indigo-400/30 transition-colors cursor-pointer group">
-                  <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-indigo-500 group-hover:scale-125 transition-transform" /><span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-indigo-500 dark:group-hover:text-white transition-colors">Petty Claim</span></div>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-indigo-500 dark:group-hover:text-white transition-colors">Petty Claim</span>
                   <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">Finance SaaS</span>
                 </li>
               </ul>
             </div>
 
             <div className="md:col-span-2 space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400" />
-                <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Network</h4>
-              </div>
+              <h4 className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">Network</h4>
               <div className="flex flex-col gap-2.5">
                 <a href="https://github.com" target="_blank" rel="noreferrer" onClick={handleRipple} className="relative overflow-hidden flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-900 hover:text-white dark:bg-white/5 dark:hover:bg-white dark:hover:text-slate-900 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 transition-all duration-200 group shadow-xs active:scale-[0.96]">
                   <div className="relative z-10 flex items-center gap-2.5 text-xs font-semibold">
@@ -671,7 +645,8 @@ export default function SkillsPage() {
                 </a>
                 <a href="https://instagram.com" target="_blank" rel="noreferrer" onClick={handleRipple} className="relative overflow-hidden flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-900 hover:text-white dark:bg-white/5 dark:hover:bg-white dark:hover:text-slate-900 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 transition-all duration-200 group shadow-xs active:scale-[0.96]">
                   <div className="relative z-10 flex items-center gap-2.5 text-xs font-semibold">
-                    <svg className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
+                    <svg className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
                     <span>Instagram</span>
                   </div>
                   <span className="relative z-10 text-xs">↗</span>
@@ -681,10 +656,7 @@ export default function SkillsPage() {
           </div>
 
           <div className="relative z-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
-              <p>© 2026 Najwan Muyassar. All rights reserved.</p>
-            </div>
+            <p>© 2026 Najwan Muyassar. All rights reserved.</p>
             <button onClick={(e) => { handleRipple(e); scrollToTop(); }} className="relative overflow-hidden inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition-all duration-200 active:scale-95 cursor-pointer shadow-xs group">
               <span className="relative z-10">Back to Top</span>
               <svg className="relative z-10 w-3.5 h-3.5 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
