@@ -10,9 +10,11 @@ export default function Home() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isPillarsVisible, setIsPillarsVisible] = useState(false);
 
-  // Splash Screen State
+  // Splash Screen State (5 Detik Countdown & Telemetri HUD)
   const [isLoading, setIsLoading] = useState(true);
   const [isExiting, setIsExiting] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [telemetryLog, setTelemetryLog] = useState("INITIALIZING KERNEL MODULES...");
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,17 +25,39 @@ export default function Home() {
   const mouseRef = useRef({ x: 0, y: 0 }); 
   const pillarsRef = useRef<HTMLElement | null>(null);
 
-  // Splash Screen Timer
+  // Splash Screen 5 Detik Timer Presisi & Telemetri
   useEffect(() => {
-    const exitTimer = setTimeout(() => {
-      setIsExiting(true);
-      const closeTimer = setTimeout(() => {
-        setIsLoading(false);
-      }, 600);
-      return () => clearTimeout(closeTimer);
-    }, 1200);
+    const logs = [
+      "SYNCHRONIZING CORE WORKSPACE...",
+      "CALIBRATING NEURAL CANVAS...",
+      "FETCHING REPOSITORY TELEMETRY...",
+      "ASSEMBLING UI/UX TOKENS...",
+      "DEPLOYING HIGH-TIER PRODUCTION SYSTEM..."
+    ];
 
-    return () => clearTimeout(exitTimer);
+    const startTime = Date.now();
+    const duration = 5000;
+
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const current = Math.min(Math.floor((elapsed / duration) * 100), 100);
+      setLoadingProgress(current);
+
+      const logIdx = Math.min(Math.floor((current / 100) * logs.length), logs.length - 1);
+      setTelemetryLog(logs[logIdx]);
+
+      if (current >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          setIsExiting(true);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 800);
+        }, 200);
+      }
+    }, 40);
+
+    return () => clearInterval(interval);
   }, []);
 
   // 1. Particle Canvas Engine
@@ -69,12 +93,12 @@ export default function Home() {
       color: string;
     }> = [];
 
-    const particleCount = Math.min(Math.floor(width / 24), 50); 
-    const colors = ["#38bdf8", "#818cf8", "#3b82f6", "#a855f7"]; 
+    const particleCount = Math.min(Math.floor(width / 20), 65); 
+    const colors = ["#06b6d4", "#6366f1", "#3b82f6", "#a855f7", "#10b981", "#f59e0b"]; 
 
     for (let i = 0; i < particleCount; i++) {
-      const vx = prefersReducedMotion ? (Math.random() - 0.5) * 0.1 : (Math.random() - 0.5) * 0.35;
-      const vy = prefersReducedMotion ? (Math.random() - 0.5) * 0.1 : (Math.random() - 0.5) * 0.35;
+      const vx = prefersReducedMotion ? (Math.random() - 0.5) * 0.1 : (Math.random() - 0.5) * 0.4;
+      const vy = prefersReducedMotion ? (Math.random() - 0.5) * 0.1 : (Math.random() - 0.5) * 0.4;
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -83,7 +107,7 @@ export default function Home() {
         baseVx: vx,
         baseVy: vy,
         size: Math.random() * 2 + 1,
-        alpha: Math.random() * 0.4 + 0.15,
+        alpha: Math.random() * 0.45 + 0.25,
         color: colors[Math.floor(Math.random() * colors.length)],
       });
     }
@@ -101,7 +125,7 @@ export default function Home() {
           const dx = p.x - mx;
           const dy = p.y - my;
           const distance = Math.hypot(dx, dy);
-          const maxDistance = 120; 
+          const maxDistance = 130; 
 
           if (distance < maxDistance && distance > 0) {
             const force = (maxDistance - distance) / maxDistance;
@@ -125,7 +149,7 @@ export default function Home() {
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.alpha;
-        ctx.shadowBlur = 6;
+        ctx.shadowBlur = 9;
         ctx.shadowColor = p.color;
         ctx.fill();
         ctx.shadowBlur = 0;
@@ -137,8 +161,8 @@ export default function Home() {
           if (distLine < 95) {
             ctx.beginPath();
             ctx.strokeStyle = p.color;
-            ctx.globalAlpha = 0.12 * (1 - distLine / 95);
-            ctx.lineWidth = 0.6;
+            ctx.globalAlpha = 0.16 * (1 - distLine / 95);
+            ctx.lineWidth = 0.7;
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.stroke();
@@ -223,7 +247,7 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [aboutProfileImages.length]);
 
-  // Fast & Zero-Lag Dynamic Ripple Effect
+  // Zero-Lag Dynamic Ripple Effect
   const handleRipple = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.currentTarget;
     const rect = target.getBoundingClientRect();
@@ -267,17 +291,16 @@ export default function Home() {
   };
 
   const techLogos = [
-    { name: "React 19", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-    { name: "Next.js 15", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-    { name: "TypeScript", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-    { name: "Tailwind CSS", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
-    { name: "Node.js", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-    { name: "Laravel 10", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" },
-    { name: "MySQL", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-    { name: "PostgreSQL", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
-    { name: "Git & GitHub", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-    { name: "Power BI", iconUrl: "/logo-powerbi.png" },
-    { name: "Figma", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+    { name: "React 19", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", borderHover: "hover:border-cyan-400" },
+    { name: "Next.js 15", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", borderHover: "hover:border-slate-300" },
+    { name: "TypeScript", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", borderHover: "hover:border-blue-400" },
+    { name: "Tailwind CSS", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", borderHover: "hover:border-teal-400" },
+    { name: "Node.js", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", borderHover: "hover:border-emerald-400" },
+    { name: "Laravel 10", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg", borderHover: "hover:border-rose-400" },
+    { name: "MySQL", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", borderHover: "hover:border-amber-400" },
+    { name: "PostgreSQL", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", borderHover: "hover:border-indigo-400" },
+    { name: "Power BI", iconUrl: "/logo-powerbi.png", borderHover: "hover:border-yellow-400" },
+    { name: "Figma", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", borderHover: "hover:border-purple-400" },
   ];
 
   const projects = [
@@ -287,9 +310,13 @@ export default function Home() {
       category: "Full-Stack Web App, Portal Konsultasi & Asesmen",
       image: "/logo-mindhaven.jpg",
       link: "https://mind-haven-opal.vercel.app/",
-      accent: "from-emerald-500/25 via-teal-600/10 to-transparent",
+      accentGradient: "from-emerald-500/25 via-teal-500/10 to-transparent",
+      cardBorder: "border-emerald-500/40 hover:border-emerald-400",
+      btnGradient: "from-emerald-500 via-teal-600 to-emerald-600 hover:from-emerald-400 hover:to-teal-500",
+      badge: "FULL-STACK WEB",
+      badgeColor: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
       scale: "scale-105",
-      glowColor: "rgba(16, 185, 129, 0.4)",
+      glowColor: "rgba(16, 185, 129, 0.45)",
       demoLink: "https://mind-haven-opal.vercel.app/",
       demoLabel: "BUKA WEBSITE",
       challenge: "Menyediakan layanan konsultasi daring yang responsif, stabil, dan melindungi privasi data rekam medis pasien.",
@@ -300,12 +327,6 @@ export default function Home() {
         "Penyimpanan Rekam Medis Terproteksi",
         "Modul Asesmen Psikologis Mandiri",
         "Dashboard Terpadu Konselor & Pengguna"
-      ],
-      metrics: [
-        { label: "Database", value: "MySQL" },
-        { label: "Waktu Muat", value: "< 1.2s" },
-        { label: "Uptime", value: "99.9%" },
-        { label: "Arsitektur", value: "Modular" }
       ],
       codeSnippet: `// mindhaven_consultation_pipeline.ts
 export const handlePatientBooking = async (payload: BookingRecord) => {
@@ -321,13 +342,17 @@ export const handlePatientBooking = async (payload: BookingRecord) => {
       category: "Full-Stack Web App, Manajemen Jadwal & Pembayaran Online",
       image: "/logo-victory-arena.png",
       link: "https://victory-arena-zeta.vercel.app/",
+      accentGradient: "from-blue-600/25 via-indigo-600/10 to-transparent",
+      cardBorder: "border-blue-500/40 hover:border-blue-400",
+      btnGradient: "from-blue-600 via-indigo-600 to-cyan-600 hover:from-blue-500 hover:to-indigo-500",
+      badge: "FULL-STACK WEB",
+      badgeColor: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
       scale: "scale-105",
-      glowColor: "rgba(13, 82, 232, 0.4)",
-      accent: "from-blue-600/25 via-indigo-600/10 to-transparent",
+      glowColor: "rgba(59, 130, 246, 0.45)",
       desc: "Aplikasi pemesanan lapangan olahraga real-time untuk mencegah konflik jadwal ganda secara otomatis.",
       demoLink: "https://victory-arena-zeta.vercel.app/",
       demoLabel: "BUKA WEBSITE",
-      challenge: "Menghilangkan kendala bentrok pencatatan jadwal (double booking) saat beban transaksi tinggi di akhir pekan.",
+      challenge: "Menghilangkan kendala bentrok pencatatan jadwal saat beban transaksi tinggi di akhir pekan.",
       solution: "Mengintegrasikan transaksi locking pada MySQL database dan update ketersediaan slot antarmuka secara presisi.",
       techStack: ["React", "Node.js", "MySQL", "Express"],
       highlights: [
@@ -335,12 +360,6 @@ export const handlePatientBooking = async (payload: BookingRecord) => {
         "Pencegahan Duplikasi Slot Otomatis",
         "Dashboard Rekap Finansial Pemilik",
         "Struk Konfirmasi Digital Terintegrasi"
-      ],
-      metrics: [
-        { label: "Database", value: "MySQL" },
-        { label: "Konflik Slot", value: "0%" },
-        { label: "Respon DB", value: "35ms" },
-        { label: "Status", value: "Production" }
       ],
       codeSnippet: `// victory_booking_strategy.ts
 const bookSlot = async (slotId: number, userId: string) => {
@@ -357,9 +376,13 @@ const bookSlot = async (slotId: number, userId: string) => {
       category: "Enterprise Financial System & Workflow Persetujuan",
       image: "/logo-pettyclaim.jpg",
       link: "#",
+      accentGradient: "from-amber-500/25 via-orange-500/10 to-transparent",
+      cardBorder: "border-amber-500/40 hover:border-amber-400",
+      btnGradient: "from-amber-500 via-orange-600 to-amber-600 hover:from-amber-400 hover:to-orange-500",
+      badge: "IN PROGRESS",
+      badgeColor: "text-amber-400 bg-amber-500/10 border-amber-500/30",
       scale: "scale-95",
-      glowColor: "rgba(245, 158, 11, 0.4)",
-      accent: "from-amber-500/25 via-orange-600/10 to-transparent",
+      glowColor: "rgba(245, 158, 11, 0.45)",
       desc: "Platform pengelolaan kas operasional dan validasi pengajuan klaim berjenjang untuk akurasi audit keuangan.",
       demoLink: "#",
       demoLabel: "TAHAP RILIS",
@@ -372,17 +395,9 @@ const bookSlot = async (slotId: number, userId: string) => {
         "Penyimpanan Bukti Transaksi Digital",
         "Ekspor Rekap Laporan Finansial"
       ],
-      metrics: [
-        { label: "Database", value: "PostgreSQL" },
-        { label: "Workflow", value: "Multi-tier" },
-        { label: "Audit Trail", value: "Immutable" },
-        { label: "Target", value: "2026" }
-      ],
       codeSnippet: `// PettyClaim Approval Engine (PHP/Laravel)
-public function approveClaim(ClaimRequest $request, int $claimId) {
-    return DB::transaction(function () use ($request, $claimId) {
-        $claim = PettyClaim::lockForUpdate()->findOrFail($claimId);
-        $claim->update(['status' => 'APPROVED', 'approved_by' => auth()->id()]);
+public function approveClaim(ClaimRequest $request, int$claimId) {
+    return DB::transaction(function () use ($request, $claimId) {$claim = PettyClaim::lockForUpdate()->findOrFail($claimId);$claim->update(['status' => 'APPROVED', 'approved_by' => auth()->id()]);
         AuditLog::create(['event' => 'CLAIM_APPROVED', 'claim_id' => $claimId]);
         return response()->json(['success' => true]);
     });
@@ -393,53 +408,93 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
   return (
     <div className="relative w-full min-h-screen bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-slate-100 selection:bg-cyan-500 selection:text-white overflow-hidden font-sans antialiased transition-colors duration-300">
 
-      {/* ================= SPLASH SCREEN ================= */}
+      {/* ================= ULTRA-TIER 5 SECONDS SAAS SPLASH SCREEN ================= */}
       {isLoading && (
         <div
-          className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950 transition-all duration-500 ease-in-out select-none ${
-            isExiting ? "opacity-0 pointer-events-none scale-102" : "opacity-100 scale-100"
+          className={`fixed inset-0 z-100 flex flex-col items-center justify-center bg-[#050811] transition-all duration-800 ease-in-out select-none ${
+            isExiting ? "opacity-0 scale-105 pointer-events-none" : "opacity-100 scale-100"
           }`}
         >
-          <div className="relative z-10 flex flex-col items-center max-w-sm px-6 text-center">
-            <div className="w-20 h-20 rounded-2xl overflow-hidden bg-slate-900 border border-slate-700 p-1 mb-5 flex items-center justify-center shadow-lg">
-              <img
-                src="/logo-najwan.jpg"
-                alt="Najwan Muyassar Logo"
-                className="w-full h-full object-cover rounded-xl"
-              />
+          {/* Multi-layered Laser Grid Background */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.15)_0,transparent_70%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[40px_40px] pointer-events-none" />
+
+          {/* Glowing Ambient Auroras */}
+          <div className="absolute w-96 h-96 rounded-full bg-cyan-500/20 blur-[120px] pointer-events-none animate-pulse" />
+          <div className="absolute w-80 h-80 rounded-full bg-indigo-600/20 blur-[100px] pointer-events-none" />
+
+          {/* Central Holographic Sphere & Scanner Assembly */}
+          <div className="relative z-10 flex flex-col items-center max-w-md px-6 text-center">
+            
+            <div className="relative flex items-center justify-center w-52 h-52 mb-8">
+              {/* Outer Orbit 1 */}
+              <div className="absolute inset-0 rounded-full border border-cyan-400/25 border-dashed animate-spin-slow pointer-events-none" />
+              {/* Counter Rotating Ring */}
+              <div className="absolute inset-3 rounded-full border border-indigo-500/30 border-t-cyan-400 border-r-transparent animate-[spin_6s_linear_infinite_reverse] pointer-events-none" />
+              {/* Inner Pulsing Radar Ring */}
+              <div className="absolute inset-7 rounded-full border border-emerald-400/20 animate-ping pointer-events-none" />
+              
+              {/* Laser Scan Sweep Line */}
+              <div className="absolute inset-x-4 h-0.5 bg-linear-to-r from-transparent via-cyan-400 to-transparent animate-[scan_2.5s_ease-in-out_infinite] shadow-[0_0_15px_#22d3ee] pointer-events-none z-20" />
+
+              {/* Core Profile Shield */}
+              <div className="relative w-28 h-28 rounded-3xl overflow-hidden bg-[#0a1224] border-2 border-cyan-400 shadow-[0_0_40px_rgba(6,182,212,0.5)] p-1.5 flex items-center justify-center z-10 group">
+                <img
+                  src="/logo-najwan.jpg"
+                  alt="Najwan Muyassar Logo"
+                  className="w-full h-full object-cover rounded-2xl filter brightness-105"
+                />
+              </div>
             </div>
-            <h2 className="text-lg font-black uppercase tracking-widest text-white">
-              NAJWAN <span className="text-cyan-400">MUYASSAR</span>
-            </h2>
-            <p className="text-[11px] font-mono text-slate-400 uppercase tracking-widest mt-1">
-              SYSTEM ARCHITECT & DEVELOPER
-            </p>
+
+            {/* Title & Identity */}
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 font-mono text-[10px] tracking-widest uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]" />
+                SYSTEM ARCHITECTURE ENGINE
+              </div>
+
+              <h2 className="text-2xl font-black uppercase tracking-[0.2em] text-white">
+                NAJWAN <span className="bg-linear-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">MUYASSAR</span>
+              </h2>
+            </div>
+
+            {/* Realtime Live Counter Display (No Loading Bar) */}
+            <div className="mt-8 space-y-3 w-full">
+              <div className="flex items-baseline justify-center gap-1.5 font-mono">
+                <span className="text-5xl font-black tracking-tight text-white drop-shadow-[0_0_20px_rgba(6,182,212,0.6)]">
+                  {loadingProgress}
+                </span>
+                <span className="text-lg font-bold text-cyan-400">%</span>
+              </div>
+
+              {/* Dynamic HUD Telemetry Feed */}
+              <div className="font-mono text-xs text-slate-400 tracking-wider h-5 flex items-center justify-center gap-2">
+                <span className="text-cyan-400 font-bold">&gt;&gt;</span>
+                <span className="text-cyan-300/90">{telemetryLog}</span>
+              </div>
+            </div>
+
           </div>
         </div>
       )}
 
-      {/* ================= TOP SCROLL PROGRESS BAR ================= */}
-      <div className="fixed top-0 left-0 w-full h-1 z-50 pointer-events-none bg-black/5 dark:bg-white/5">
-        <div
-          className="h-full bg-cyan-600 dark:bg-cyan-400 transition-all duration-150 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
-
       {/* ================= CANVAS PARTICLE ENGINE ================= */}
       <canvas
         ref={canvasRef}
-        className="fixed inset-0 z-0 opacity-40 dark:opacity-60 pointer-events-none"
+        className="fixed inset-0 z-0 opacity-45 dark:opacity-75 pointer-events-none"
       />
 
-      {/* ================= SUBTLE AMBIENT BACKGROUND ================= */}
+      {/* ================= COLORFUL AMBIENT BACKGROUND GLOWS ================= */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div
-          className="absolute w-96 h-96 rounded-full bg-cyan-500/5 dark:bg-cyan-500/10 blur-[100px] transition-transform duration-300 ease-out"
+          className="absolute w-120 h-120 rounded-full bg-radial from-cyan-500/20 via-blue-500/10 to-transparent blur-[120px] transition-transform duration-300 ease-out"
           style={{
-            transform: `translate3d(${mousePos.x - 192}px, ${mousePos.y - 192}px, 0)`,
+            transform: `translate3d(${mousePos.x - 240}px,${mousePos.y - 240}px, 0)`,
           }}
         />
+        <div className="absolute -top-32 right-10 w-130 h-130 bg-purple-600/15 blur-[140px] rounded-full pointer-events-none animate-pulse" />
+        <div className="absolute top-1/2 -left-40 w-120 h-120 bg-emerald-600/15 blur-[150px] rounded-full pointer-events-none" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-size-[48px_48px]" />
       </div>
 
@@ -450,7 +505,7 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
           {/* LEFT COLUMN */}
           <div className="lg:col-span-7 space-y-6 text-left">
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 dark:text-cyan-400 text-xs font-mono font-medium tracking-wide">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/40 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-bold tracking-wide shadow-[0_0_15px_rgba(6,182,212,0.15)]">
                 TERBUKA UNTUK PROYEK & REKRUTMEN
               </div>
 
@@ -458,7 +513,7 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
                 Najwan Muyassar
               </h1>
 
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-cyan-700 dark:text-cyan-400">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight bg-linear-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-400 bg-clip-text text-transparent drop-shadow-sm">
                 Full-Stack Developer & UI/UX Designer
               </h2>
             </div>
@@ -467,12 +522,12 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
               Halo! Saya membangun aplikasi web yang cepat, stabil, dan nyaman dipakai pengguna nyata. Dari logika database di balik layar sampai detail antarmuka interaktif dan visualisasi analitik bisnis.
             </p>
 
-            {/* ACTION BUTTONS WITH DYNAMIC RIPPLE & ACTIVE STATE */}
+            {/* ACTION BUTTONS WITH VIBRANT GRADIENT & RIPPLE */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link
                 href="/projects"
                 onClick={handleRipple}
-                className="group relative overflow-hidden inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0.5 active:scale-95 active:brightness-90 cursor-pointer select-none"
+                className="group relative overflow-hidden inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-linear-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:via-blue-500 hover:to-indigo-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-[0_4px_20px_rgba(6,182,212,0.35)] hover:shadow-[0_6px_25px_rgba(6,182,212,0.5)] hover:-translate-y-0.5 active:translate-y-0.5 active:scale-95 active:brightness-90 cursor-pointer select-none border border-cyan-300/30"
               >
                 <span className="relative z-10">Lihat Hasil Karya Saya</span>
                 <span className="relative z-10 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -481,23 +536,24 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
               <Link
                 href="/contact"
                 onClick={handleRipple}
-                className="group relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-slate-200/70 dark:bg-white/5 hover:bg-slate-300/80 dark:hover:bg-white/10 text-slate-900 dark:text-white font-semibold text-xs uppercase tracking-wider transition-all duration-200 border border-slate-300/80 dark:border-white/15 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-95 active:brightness-90 cursor-pointer select-none"
+                className="group relative overflow-hidden inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white/70 dark:bg-[#091224] hover:bg-slate-100 dark:hover:bg-[#0e1c38] text-slate-900 dark:text-white font-semibold text-xs uppercase tracking-wider transition-all duration-200 border border-slate-300 dark:border-cyan-500/30 hover:border-cyan-400/60 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)] hover:-translate-y-0.5 active:translate-y-0.5 active:scale-95 active:brightness-90 cursor-pointer select-none backdrop-blur-md"
               >
                 <span className="relative z-10">Ajak Ngobrol Santai</span>
-                <span className="relative z-10 transition-transform duration-200 group-hover:translate-x-1">→</span>
+                <span className="relative z-10 transition-transform duration-200 group-hover:translate-x-1 text-cyan-600 dark:text-cyan-400 font-bold">→</span>
               </Link>
             </div>
           </div>
 
           {/* RIGHT COLUMN */}
           <div className="lg:col-span-5 relative flex items-center justify-center min-h-95">
-            <div className="absolute w-72 sm:w-88 h-72 sm:h-88 rounded-full border border-slate-300 dark:border-white/10 pointer-events-none" />
+            <div className="absolute w-72 sm:w-88 h-72 sm:h-88 rounded-full border border-cyan-400/30 dark:border-cyan-400/25 pointer-events-none" />
+            <div className="absolute w-84 sm:w-96 h-84 sm:h-96 rounded-full border border-dashed border-indigo-400/30 dark:border-indigo-400/20 pointer-events-none animate-spin-slow" />
 
             <div className="relative z-10 w-full max-w-85 flex items-end justify-center pointer-events-none">
               <img
                 src="/najwan-removebg.png"
                 alt="Najwan Muyassar"
-                className="w-full h-auto max-h-115 object-contain object-bottom filter drop-shadow-md select-none"
+                className="w-full h-auto max-h-115 object-contain object-bottom filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)] select-none"
                 style={{
                   maskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
                   WebkitMaskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
@@ -510,26 +566,26 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
       </div>
 
       {/* ================= TECH STACK MARQUEE ================= */}
-      <section className="relative z-10 w-full bg-slate-100/80 dark:bg-[#090e1c]/80 border-y border-slate-200 dark:border-white/10 py-5 overflow-hidden backdrop-blur-md">
+      <section className="relative z-10 w-full bg-slate-100/90 dark:bg-[#090e1c]/90 border-y border-slate-200 dark:border-cyan-500/20 py-5 overflow-hidden backdrop-blur-md">
         <div className="flex w-max animate-[marquee_25s_linear_infinite] hover:[animation-play-state:paused]">
           <div className="flex items-center gap-4 pr-4">
             {techLogos.map((tech, idx) => (
-              <div key={`tech-1-${idx}`} className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 shrink-0 transition-transform hover:scale-102">
+              <div key={`tech-1-${idx}`} className={`flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 ${tech.borderHover} hover:shadow-[0_0_15px_rgba(6,182,212,0.25)] shrink-0 transition-all duration-200 hover:scale-105`}>
                 <div className="w-5 h-5 flex items-center justify-center shrink-0">
                   <img src={tech.iconUrl} alt={tech.name} className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="font-mono text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">{tech.name}</span>
+                <span className="font-mono text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200">{tech.name}</span>
               </div>
             ))}
           </div>
 
           <div className="flex items-center gap-4 pr-4" aria-hidden="true">
             {techLogos.map((tech, idx) => (
-              <div key={`tech-2-${idx}`} className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 shrink-0 transition-transform hover:scale-102">
+              <div key={`tech-2-${idx}`} className={`flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 ${tech.borderHover} hover:shadow-[0_0_15px_rgba(6,182,212,0.25)] shrink-0 transition-all duration-200 hover:scale-105`}>
                 <div className="w-5 h-5 flex items-center justify-center shrink-0">
                   <img src={tech.iconUrl} alt={tech.name} className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="font-mono text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">{tech.name}</span>
+                <span className="font-mono text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200">{tech.name}</span>
               </div>
             ))}
           </div>
@@ -540,7 +596,8 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
       <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="relative flex justify-center items-center">
-            <div className="relative w-64 sm:w-76 h-96 rounded-2xl overflow-hidden bg-slate-900 border border-slate-300 dark:border-white/15 shadow-xl">
+            <div className="absolute -inset-4 bg-linear-to-tr from-cyan-500/30 via-blue-600/20 to-purple-600/30 rounded-3xl blur-2xl opacity-75 pointer-events-none" />
+            <div className="relative w-64 sm:w-76 h-96 rounded-2xl overflow-hidden bg-slate-900 border-2 border-cyan-400/40 shadow-2xl">
               {aboutProfileImages.map((src, index) => (
                 <img
                   key={src}
@@ -556,12 +613,12 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
           </div>
 
           <div className="space-y-4">
-            <div className="inline-flex items-center px-3 py-1 rounded-md bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 text-xs font-mono font-semibold tracking-wider">
+            <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-bold tracking-wider border border-cyan-400/30">
               TENTANG SAYA
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight uppercase leading-snug">
-              <span className="bg-linear-to-r from-slate-900 via-slate-700 to-cyan-700 dark:from-white dark:via-sky-200 dark:to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-slate-900 via-blue-700 to-cyan-600 dark:from-white dark:via-sky-200 dark:to-blue-400 bg-clip-text text-transparent">
                 Fokus Pada Hasil & Kualitas
               </span>
             </h2>
@@ -574,10 +631,10 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
               <Link 
                 href="/about" 
                 onClick={handleRipple} 
-                className="group relative overflow-hidden inline-flex items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-950 px-6 py-3 rounded-xl font-bold text-xs tracking-wider uppercase transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-95 active:brightness-90 cursor-pointer shadow-sm"
+                className="group relative overflow-hidden inline-flex items-center gap-2 bg-linear-to-r from-slate-900 to-slate-800 dark:from-white dark:to-slate-200 text-white dark:text-slate-950 px-7 py-3.5 rounded-xl font-bold text-xs tracking-wider uppercase transition-all duration-200 shadow-md hover:shadow-cyan-400/20 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-95 active:brightness-90 cursor-pointer"
               >
                 <span className="relative z-10">Kenal Lebih Dekat</span>
-                <span className="relative z-10 transition-transform duration-200 group-hover:translate-x-1">→</span>
+                <span className="relative z-10 transition-transform duration-200 group-hover:translate-x-1 text-cyan-400 dark:text-cyan-600 font-bold">→</span>
               </Link>
             </div>
           </div>
@@ -588,11 +645,11 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
       <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-16 border-t border-slate-200 dark:border-white/10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
           <div className="space-y-1.5">
-            <div className="inline-flex items-center px-3 py-1 rounded-md bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 text-xs font-mono font-semibold tracking-wider">
+            <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-bold tracking-wider border border-cyan-400/30">
               PORTFOLIO
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight uppercase">
-              <span className="bg-linear-to-r from-slate-900 via-slate-700 to-cyan-700 dark:from-white dark:via-sky-200 dark:to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-slate-900 via-blue-700 to-cyan-600 dark:from-white dark:via-sky-200 dark:to-blue-400 bg-clip-text text-transparent">
                 Proyek Pilihan
               </span>
             </h2>
@@ -601,10 +658,10 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
           <Link 
             href="/projects" 
             onClick={handleRipple} 
-            className="group relative overflow-hidden inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 dark:border-white/15 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 bg-white dark:bg-[#0A1428] hover:border-cyan-500 transition-all duration-200 active:translate-y-0.5 active:scale-95 active:brightness-90"
+            className="group relative overflow-hidden inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-cyan-500/30 hover:border-cyan-400 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 bg-white dark:bg-[#0A1428] hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all duration-200 active:translate-y-0.5 active:scale-95 active:brightness-90"
           >
             <span className="relative z-10">Lihat Semua Proyek</span>
-            <span className="relative z-10 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+            <span className="relative z-10 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-cyan-500 font-bold">↗</span>
           </Link>
         </div>
 
@@ -624,23 +681,25 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
                   openModal(project); 
                 }
               }}
-              className="relative group rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#091122] p-6 flex flex-col justify-between cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:border-cyan-500/50 hover:shadow-md active:translate-y-0.5 active:scale-98 focus:outline-none focus:ring-2 focus:ring-cyan-500 overflow-hidden"
+              className={`relative group rounded-2xl border ${project.cardBorder} bg-white dark:bg-[#091122] p-6 flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl active:translate-y-0.5 active:scale-98 focus:outline-none focus:ring-2 focus:ring-cyan-400 overflow-hidden`}
             >
-              <div>
+              <div className={`absolute -inset-1 bg-linear-to-b ${project.accentGradient} opacity-40 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+
+              <div className="relative z-10">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="font-mono text-xs font-semibold text-slate-400">0{idx + 1}</span>
-                  <span className="font-mono text-[11px] text-cyan-600 dark:text-cyan-400 font-semibold tracking-wider uppercase">
-                    {project.techStack[2]}
+                  <span className="font-mono text-xs font-bold text-slate-400">0{idx + 1}</span>
+                  <span className={`font-mono text-[10px] px-2.5 py-1 rounded-md font-bold tracking-wider uppercase border ${project.badgeColor}`}>
+                    {project.badge}
                   </span>
                 </div>
 
-                <div className="relative w-full h-44 rounded-xl flex items-center justify-center p-3 mb-4 bg-slate-100 dark:bg-[#0c172e] border border-slate-200 dark:border-white/5">
-                  <div className="w-24 h-24 rounded-xl bg-white dark:bg-white/95 flex items-center justify-center p-2 shadow-sm border border-slate-200 dark:border-white/10">
+                <div className="relative w-full h-44 rounded-xl flex items-center justify-center p-3 mb-4 bg-slate-100 dark:bg-[#0c172e] border border-slate-200 dark:border-white/10 group-hover:border-cyan-400/40 transition-colors">
+                  <div className="w-24 h-24 rounded-xl bg-white dark:bg-white/95 flex items-center justify-center p-2 shadow-md border border-slate-200 dark:border-white/10 group-hover:scale-105 transition-transform duration-300">
                     <img src={project.image} alt={project.title} className={`w-full h-full object-contain ${project.scale}`} />
                   </div>
                 </div>
 
-                <h3 className="font-bold text-base text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors line-clamp-2 leading-snug">
+                <h3 className="font-bold text-base text-slate-900 dark:text-white group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors line-clamp-2 leading-snug">
                   {project.title}
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 font-normal mt-1.5 line-clamp-2 leading-relaxed">
@@ -648,8 +707,8 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
                 </p>
               </div>
 
-              <div className="pt-4 mt-5 border-t border-slate-100 dark:border-white/10">
-                <div className="w-full py-2.5 px-3 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-800 dark:text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 group-hover:bg-cyan-600 group-hover:text-white transition-colors duration-200">
+              <div className="relative z-10 pt-4 mt-5 border-t border-slate-100 dark:border-white/10">
+                <div className={`w-full py-2.5 px-3 rounded-xl bg-linear-to-r ${project.btnGradient} text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 shadow-sm group-hover:shadow-md`}>
                   <span>Bedah Rincian Proyek</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </div>
@@ -662,12 +721,12 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
       {/* ================= THREE PILLARS OF MASTERY ================= */}
       <section ref={pillarsRef} className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-16 border-t border-slate-200 dark:border-white/10">
         <div className={`space-y-2 mb-10 text-center max-w-3xl mx-auto transition-all duration-500 ${isPillarsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          <div className="inline-flex items-center px-3 py-1 rounded-md bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 text-xs font-mono font-semibold tracking-wider">
+          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-bold tracking-wider border border-cyan-400/30">
             FOKUS KEAHLIAN
           </div>
 
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight uppercase">
-            <span className="bg-linear-to-r from-slate-900 via-slate-700 to-cyan-700 dark:from-white dark:via-sky-200 dark:to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-slate-900 via-blue-700 to-cyan-600 dark:from-white dark:via-sky-200 dark:to-blue-400 bg-clip-text text-transparent">
               Keahlian Utama
             </span>
           </h2>
@@ -685,19 +744,21 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
             onClick={(e) => { handleRipple(e); router.push("/projects"); }}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') router.push("/projects"); }}
             onMouseMove={handleBentoMouseMove}
-            className="group relative overflow-hidden bg-white dark:bg-[#091122] border border-slate-200 dark:border-white/10 p-6 rounded-2xl hover:border-cyan-500/50 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1 active:translate-y-0.5 active:scale-98 active:brightness-90 flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="group relative overflow-hidden bg-white dark:bg-[#091122] border-2 border-cyan-500/30 hover:border-cyan-400 p-6 rounded-2xl shadow-sm hover:shadow-[0_10px_30px_rgba(6,182,212,0.25)] transition-all duration-300 hover:-translate-y-1.5 active:translate-y-0.5 active:scale-98 active:brightness-90 flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-400"
           >
-            <div className="space-y-3.5">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
+
+            <div className="space-y-3.5 relative z-10">
               <div className="flex items-center justify-between">
-                <div className="w-11 h-11 rounded-xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 text-cyan-600 dark:text-cyan-400">
+                <div className="w-11 h-11 rounded-xl bg-cyan-500/15 flex items-center justify-center border border-cyan-400/40 text-cyan-600 dark:text-cyan-400 shadow-xs">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
                 </div>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 font-semibold uppercase">
+                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 font-bold uppercase border border-cyan-400/30">
                   Full-Stack
                 </span>
               </div>
 
-              <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors">
                 1. Pembuatan Web & Aplikasi Stabil
               </h3>
 
@@ -705,17 +766,17 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
                 Saya membuat aplikasi web yang siap pakai dari frontend sampai backend. Antarmuka cepat diakses, database aman, dan sistem siap menampung traffic tinggi.
               </p>
 
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#050811] border border-slate-200 dark:border-white/5 space-y-1 text-xs text-slate-600 dark:text-slate-300">
+              <div className="p-3 rounded-xl bg-cyan-500/5 dark:bg-[#050811] border border-cyan-500/20 space-y-1 text-xs text-slate-700 dark:text-slate-300">
                 <div className="flex items-center gap-2">
-                  <span className="text-cyan-600 dark:text-cyan-400 font-bold">•</span> Next.js, React, Tailwind CSS
+                  <span className="text-cyan-500 font-bold">•</span> Next.js, React, Tailwind CSS
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-cyan-600 dark:text-cyan-400 font-bold">•</span> Laravel, MySQL, PostgreSQL
+                  <span className="text-cyan-500 font-bold">•</span> Laravel, MySQL, PostgreSQL
                 </div>
               </div>
             </div>
 
-            <div className="pt-4 mt-5 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs text-cyan-600 dark:text-cyan-400 font-bold">
+            <div className="pt-4 mt-5 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs text-cyan-600 dark:text-cyan-400 font-bold relative z-10">
               <span>Buka Portofolio Web App</span>
               <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
             </div>
@@ -728,19 +789,21 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
             onClick={(e) => { handleRipple(e); router.push("/projects"); }}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') router.push("/projects"); }}
             onMouseMove={handleBentoMouseMove}
-            className="group relative overflow-hidden bg-white dark:bg-[#091122] border border-slate-200 dark:border-white/10 p-6 rounded-2xl hover:border-cyan-500/50 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1 active:translate-y-0.5 active:scale-98 active:brightness-90 flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="group relative overflow-hidden bg-white dark:bg-[#091122] border-2 border-amber-500/30 hover:border-amber-400 p-6 rounded-2xl shadow-sm hover:shadow-[0_10px_30px_rgba(245,158,11,0.25)] transition-all duration-300 hover:-translate-y-1.5 active:translate-y-0.5 active:scale-98 active:brightness-90 flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
           >
-            <div className="space-y-3.5">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
+
+            <div className="space-y-3.5 relative z-10">
               <div className="flex items-center justify-between">
-                <div className="w-11 h-11 rounded-xl bg-amber-500/10 flex items-center justify-center border border-amber-500/20 text-amber-600 dark:text-amber-400">
+                <div className="w-11 h-11 rounded-xl bg-amber-500/15 flex items-center justify-center border border-amber-400/40 text-amber-600 dark:text-amber-400 shadow-xs">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                 </div>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 font-semibold uppercase">
+                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-300 font-bold uppercase border border-amber-400/30">
                   BI & Analytics
                 </span>
               </div>
 
-              <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">
                 2. Analisis Data & Dashboard Manajemen
               </h3>
 
@@ -748,17 +811,17 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
                 Data mentah dan laporan tabel yang panjang diubah menjadi dashboard visual interaktif yang langsung memberi insight efisien dan tren metrik masa depan.
               </p>
 
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#050811] border border-slate-200 dark:border-white/5 space-y-1 text-xs text-slate-600 dark:text-slate-300">
+              <div className="p-3 rounded-xl bg-amber-500/5 dark:bg-[#050811] border border-amber-500/20 space-y-1 text-xs text-slate-700 dark:text-slate-300">
                 <div className="flex items-center gap-2">
-                  <span className="text-amber-600 dark:text-amber-400 font-bold">•</span> Microsoft Power BI
+                  <span className="text-amber-500 font-bold">•</span> Microsoft Power BI
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-amber-600 dark:text-amber-400 font-bold">•</span> SQL & DAX Modeling
+                  <span className="text-amber-500 font-bold">•</span> SQL & DAX Modeling
                 </div>
               </div>
             </div>
 
-            <div className="pt-4 mt-5 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs text-amber-600 dark:text-amber-400 font-bold">
+            <div className="pt-4 mt-5 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs text-amber-600 dark:text-amber-400 font-bold relative z-10">
               <span>Buka Sampel Dashboard Power BI</span>
               <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
             </div>
@@ -771,19 +834,21 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
             onClick={(e) => { handleRipple(e); router.push("/projects"); }}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') router.push("/projects"); }}
             onMouseMove={handleBentoMouseMove}
-            className="group relative overflow-hidden bg-white dark:bg-[#091122] border border-slate-200 dark:border-white/10 p-6 rounded-2xl hover:border-cyan-500/50 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1 active:translate-y-0.5 active:scale-98 active:brightness-90 flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="group relative overflow-hidden bg-white dark:bg-[#091122] border-2 border-purple-500/30 hover:border-purple-400 p-6 rounded-2xl shadow-sm hover:shadow-[0_10px_30px_rgba(168,85,247,0.25)] transition-all duration-300 hover:-translate-y-1.5 active:translate-y-0.5 active:scale-98 active:brightness-90 flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-400"
           >
-            <div className="space-y-3.5">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl pointer-events-none" />
+
+            <div className="space-y-3.5 relative z-10">
               <div className="flex items-center justify-between">
-                <div className="w-11 h-11 rounded-xl bg-purple-500/10 flex items-center justify-center border border-purple-500/20 text-purple-600 dark:text-purple-400">
+                <div className="w-11 h-11 rounded-xl bg-purple-500/15 flex items-center justify-center border border-purple-400/40 text-purple-600 dark:text-purple-400 shadow-xs">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
                 </div>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 font-semibold uppercase">
-                  Design
+                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-purple-500/15 text-purple-700 dark:text-purple-300 font-bold uppercase border border-purple-400/30">
+                  UI/UX
                 </span>
               </div>
 
-              <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-purple-500 dark:group-hover:text-purple-400 transition-colors">
                 3. Desain Antarmuka yang Nyaman Dipakai
               </h3>
 
@@ -791,17 +856,17 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
                 Sebelum mulai penulisan kode, alur aplikasi dirancang matang di Figma. Hasilnya adalah tata letak intuitif, ramah pengguna, dan tanpa kebingungan alur.
               </p>
 
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#050811] border border-slate-200 dark:border-white/5 space-y-1 text-xs text-slate-600 dark:text-slate-300">
+              <div className="p-3 rounded-xl bg-purple-500/5 dark:bg-[#050811] border border-purple-500/20 space-y-1 text-xs text-slate-700 dark:text-slate-300">
                 <div className="flex items-center gap-2">
-                  <span className="text-purple-600 dark:text-purple-400 font-bold">•</span> Standar Desain Rapi & Konsisten
+                  <span className="text-purple-500 font-bold">•</span> Standar Desain Rapi & Konsisten
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-purple-600 dark:text-purple-400 font-bold">•</span> Figma Prototype Interaktif
+                  <span className="text-purple-500 font-bold">•</span> Figma Prototype Interaktif
                 </div>
               </div>
             </div>
 
-            <div className="pt-4 mt-5 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs text-purple-600 dark:text-purple-400 font-bold">
+            <div className="pt-4 mt-5 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs text-purple-600 dark:text-purple-400 font-bold relative z-10">
               <span>Buka Prototipe Figma UI/UX</span>
               <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
             </div>
@@ -811,17 +876,17 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
 
       {/* ================= BOTTOM CTA ================= */}
       <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-10 mb-6">
-        <div className="p-8 sm:p-10 rounded-2xl bg-white dark:bg-[#080f1e] border border-slate-200 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+        <div className="p-8 sm:p-10 rounded-2xl bg-linear-to-r from-cyan-500/15 via-blue-600/10 to-indigo-600/15 border-2 border-cyan-400/40 flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_8px_30px_rgba(6,182,212,0.2)] backdrop-blur-xl">
           <div className="space-y-1.5 text-center md:text-left">
-            <span className="inline-block px-2.5 py-0.5 rounded bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 font-mono text-xs uppercase font-medium">
+            <span className="inline-block px-3 py-0.5 rounded-full bg-cyan-500/20 text-cyan-600 dark:text-cyan-300 font-mono text-xs uppercase font-bold border border-cyan-400/30">
               LANGKAH BERIKUTNYA
             </span>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight uppercase">
-              <span className="bg-linear-to-r from-slate-900 via-slate-700 to-cyan-700 dark:from-white dark:via-sky-200 dark:to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-slate-900 via-blue-700 to-cyan-600 dark:from-white dark:via-sky-200 dark:to-blue-400 bg-clip-text text-transparent">
                 Punya Rencana Proyek atau Posisi yang Cocok?
               </span>
             </h3>
-            <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm font-normal max-w-lg">
+            <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm font-normal max-w-lg">
               Saya senang berdiskusi tentang bagaimana teknologi web dan analitik data bisa mempercepat target produk Anda.
             </p>
           </div>
@@ -829,26 +894,26 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
           <Link 
             href="/contact" 
             onClick={handleRipple} 
-            className="group relative overflow-hidden shrink-0 px-7 py-3.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-sm hover:-translate-y-0.5 active:translate-y-0.5 active:scale-95 active:brightness-90 flex items-center gap-2 cursor-pointer"
+            className="group relative overflow-hidden shrink-0 px-8 py-4 rounded-xl bg-linear-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:via-blue-500 hover:to-indigo-500 text-white text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-lg hover:shadow-cyan-400/40 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-95 active:brightness-90 flex items-center gap-2 cursor-pointer border border-cyan-300/30"
           >
             <span className="relative z-10">Hubungi Saya Sekarang</span>
-            <span className="relative z-10 transition-transform duration-200 group-hover:translate-x-1">→</span>
+            <span className="relative z-10 transition-transform duration-200 group-hover:translate-x-1 font-bold">→</span>
           </Link>
         </div>
       </section>
 
-      {/* ================= PROJECT DETAIL MODAL ================= */}
+      {/* ================= PROJECT DETAIL MODAL (CLEANED) ================= */}
       {isModalOpen && selectedProject && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 animate-fade-in">
           <div 
-            className="fixed inset-0 bg-slate-950/70 backdrop-blur-sm transition-opacity" 
+            className="fixed inset-0 bg-slate-950/75 backdrop-blur-md transition-opacity" 
             onClick={closeModal} 
           />
 
-          <div className="relative z-10 w-full max-w-3xl max-h-[90vh] flex flex-col rounded-2xl bg-white dark:bg-[#091122] border border-slate-200 dark:border-white/15 shadow-2xl overflow-hidden animate-scale-up">
+          <div className="relative z-10 w-full max-w-3xl max-h-[90vh] flex flex-col rounded-2xl bg-white dark:bg-[#091122] border-2 border-cyan-400/40 shadow-[0_20px_60px_rgba(0,0,0,0.7)] overflow-hidden animate-scale-up">
             
             {/* Header */}
-            <div className="p-5 border-b border-slate-100 dark:border-white/10 flex items-center justify-between">
+            <div className="p-5 border-b border-slate-100 dark:border-white/10 flex items-center justify-between bg-slate-50/50 dark:bg-white/5">
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-600 dark:text-cyan-400 font-bold">
                   SPESIFIKASI PROYEK
@@ -871,7 +936,7 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
                   activeTab === "showcase" ? "border-cyan-500 text-cyan-600 dark:text-cyan-400" : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                 }`}
               >
-                Overview & Metrik
+                Overview & Detail
               </button>
               <button 
                 onClick={() => setActiveTab("code")}
@@ -887,15 +952,6 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
             <div className="p-6 overflow-y-auto space-y-5 text-xs sm:text-sm">
               {activeTab === "showcase" ? (
                 <>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {selectedProject.metrics?.map((m: any, i: number) => (
-                      <div key={i} className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-center">
-                        <div className="text-base font-extrabold text-cyan-600 dark:text-cyan-400">{m.value}</div>
-                        <div className="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase">{m.label}</div>
-                      </div>
-                    ))}
-                  </div>
-
                   <div className="space-y-1.5">
                     <h4 className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">Tantangan & Solusi:</h4>
                     <p className="text-slate-600 dark:text-slate-300 leading-relaxed"><span className="font-semibold text-slate-900 dark:text-white">Tantangan:</span> {selectedProject.challenge}</p>
@@ -907,7 +963,7 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600 dark:text-slate-300">
                       {selectedProject.highlights?.map((h: string, idx: number) => (
                         <li key={idx} className="flex items-center gap-2 p-2 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
-                          <span className="text-cyan-600 dark:text-cyan-400 font-bold">•</span> {h}
+                          <span className="text-cyan-500 font-bold">•</span> {h}
                         </li>
                       ))}
                     </ul>
@@ -917,7 +973,7 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
                     <h4 className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">Teknologi Terpasang:</h4>
                     <div className="flex flex-wrap gap-2">
                       {selectedProject.techStack?.map((t: string, idx: number) => (
-                        <span key={idx} className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 text-xs font-mono">
+                        <span key={idx} className="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-400/30 text-cyan-700 dark:text-cyan-300 text-xs font-mono font-semibold">
                           {t}
                         </span>
                       ))}
@@ -928,9 +984,9 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono text-slate-500 dark:text-slate-400">Cuplikan Logika Handler Inti</span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300">TypeScript / PHP</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold border border-cyan-500/20">TypeScript / PHP</span>
                   </div>
-                  <pre className="p-4 rounded-xl bg-slate-900 text-cyan-300 font-mono text-xs overflow-x-auto leading-relaxed">
+                  <pre className="p-4 rounded-xl bg-slate-900 text-cyan-300 font-mono text-xs overflow-x-auto leading-relaxed border border-cyan-500/20">
                     <code>{selectedProject.codeSnippet}</code>
                   </pre>
                 </div>
@@ -951,13 +1007,13 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
                   href={selectedProject.demoLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-5 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer flex items-center gap-1.5"
+                  className="px-5 py-2.5 rounded-lg bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer flex items-center gap-1.5 shadow-sm"
                 >
                   <span>{selectedProject.demoLabel}</span>
                   <span>↗</span>
                 </a>
               ) : (
-                <span className="text-xs font-mono text-amber-700 dark:text-amber-400 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/20">
+                <span className="text-xs font-mono text-amber-700 dark:text-amber-400 px-3 py-1.5 rounded-md bg-amber-500/10 border border-amber-500/25 font-bold">
                   {selectedProject.demoLabel}
                 </span>
               )}
@@ -969,16 +1025,16 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
 
       {/* ================= FOOTER ================= */}
       <footer className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 pt-4">
-        <div className="relative rounded-2xl bg-white dark:bg-[#080f1e] border border-slate-200 dark:border-white/10 p-8 transition-all overflow-hidden shadow-sm">
+        <div className="relative rounded-2xl bg-white dark:bg-[#080f1e] border-2 border-cyan-500/20 p-8 transition-all overflow-hidden shadow-sm">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-slate-100 dark:border-white/10">
             <div className="md:col-span-5 space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg overflow-hidden bg-slate-900 border border-slate-700 flex items-center justify-center p-0.5">
+                <div className="w-9 h-9 rounded-lg overflow-hidden bg-slate-900 border border-cyan-400/40 flex items-center justify-center p-0.5 shadow-[0_0_10px_rgba(6,182,212,0.25)]">
                   <img src="/logo-najwan.jpg" alt="Najwan Muyassar Logo" className="w-full h-full object-cover rounded-md" />
                 </div>
                 <div>
                   <h3 className="font-extrabold text-base tracking-wide text-slate-900 dark:text-white">NAJWAN MUYASSAR</h3>
-                  <p className="text-[10px] font-mono text-cyan-600 dark:text-cyan-400 uppercase tracking-wider">Full-Stack Dev • Data • UI/UX</p>
+                  <p className="text-[10px] font-mono bg-linear-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent uppercase tracking-wider font-bold">Full-Stack Dev • Data • UI/UX</p>
                 </div>
               </div>
               <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed font-normal max-w-md">
@@ -989,28 +1045,28 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
             <div className="md:col-span-2 space-y-3">
               <h4 className="text-xs font-mono font-bold tracking-wider text-slate-900 dark:text-white uppercase">Navigasi Cepat</h4>
               <ul className="space-y-2 text-xs font-medium text-slate-600 dark:text-slate-300">
-                <li><Link href="/" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">Halaman Utama</Link></li>
-                <li><Link href="/about" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">Biografi Lengkap</Link></li>
-                <li><Link href="/projects" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">Galeri Proyek</Link></li>
-                <li><Link href="/skills" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">Keahlian & Stack</Link></li>
-                <li><Link href="/experience" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">Pengalaman Kerja</Link></li>
+                <li><Link href="/" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">Halaman Utama</Link></li>
+                <li><Link href="/about" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">Biografi Lengkap</Link></li>
+                <li><Link href="/projects" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">Galeri Proyek</Link></li>
+                <li><Link href="/skills" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">Keahlian & Stack</Link></li>
+                <li><Link href="/experience" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">Pengalaman Kerja</Link></li>
               </ul>
             </div>
 
             <div className="md:col-span-3 space-y-3">
               <h4 className="text-xs font-mono font-bold tracking-wider text-slate-900 dark:text-white uppercase">Aplikasi Unggulan</h4>
               <ul className="space-y-2 text-xs font-medium text-slate-600 dark:text-slate-300">
-                <li className="flex items-center justify-between p-2 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                <li className="flex items-center justify-between p-2 rounded-lg bg-blue-500/5 dark:bg-white/5 border border-blue-500/20">
                   <span className="font-semibold text-slate-800 dark:text-slate-200">VictoryArena</span>
-                  <span className="text-[10px] font-mono text-slate-400">MySQL</span>
+                  <span className="text-[10px] font-mono text-blue-600 dark:text-blue-400 font-bold">MySQL</span>
                 </li>
-                <li className="flex items-center justify-between p-2 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                <li className="flex items-center justify-between p-2 rounded-lg bg-emerald-500/5 dark:bg-white/5 border border-emerald-500/20">
                   <span className="font-semibold text-slate-800 dark:text-slate-200">MindHaven</span>
-                  <span className="text-[10px] font-mono text-slate-400">MySQL</span>
+                  <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">MySQL</span>
                 </li>
-                <li className="flex items-center justify-between p-2 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                <li className="flex items-center justify-between p-2 rounded-lg bg-amber-500/5 dark:bg-white/5 border border-amber-500/20">
                   <span className="font-semibold text-slate-800 dark:text-slate-200">Petty Claim</span>
-                  <span className="text-[10px] font-mono text-slate-400">PostgreSQL</span>
+                  <span className="text-[10px] font-mono text-amber-600 dark:text-amber-400 font-bold">PostgreSQL</span>
                 </li>
               </ul>
             </div>
@@ -1018,11 +1074,11 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
             <div className="md:col-span-2 space-y-3">
               <h4 className="text-xs font-mono font-bold tracking-wider text-slate-900 dark:text-white uppercase">Koneksi Sosial</h4>
               <div className="flex flex-col gap-2">
-                <a href="https://github.com/Cartennzy" target="_blank" rel="noreferrer" onClick={handleRipple} className="relative overflow-hidden flex items-center justify-between px-3 py-2 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-cyan-500 text-xs font-semibold transition-all">
+                <a href="https://github.com/Cartennzy" target="_blank" rel="noreferrer" onClick={handleRipple} className="relative overflow-hidden flex items-center justify-between px-3 py-2 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-cyan-400 hover:text-cyan-500 text-xs font-semibold transition-all">
                   <span className="relative z-10">GitHub</span>
                   <span className="relative z-10">↗</span>
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noreferrer" onClick={handleRipple} className="relative overflow-hidden flex items-center justify-between px-3 py-2 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-cyan-500 text-xs font-semibold transition-all">
+                <a href="https://linkedin.com" target="_blank" rel="noreferrer" onClick={handleRipple} className="relative overflow-hidden flex items-center justify-between px-3 py-2 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-blue-400 hover:text-blue-500 text-xs font-semibold transition-all">
                   <span className="relative z-10">LinkedIn</span>
                   <span className="relative z-10">↗</span>
                 </a>
@@ -1034,7 +1090,7 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
             <p>© 2026 Najwan Muyassar. Dibuat dengan performa presisi tinggi.</p>
             <button 
               onClick={(e) => { handleRipple(e); scrollToTop(); }} 
-              className="relative overflow-hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-all cursor-pointer"
+              className="relative overflow-hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-all cursor-pointer"
             >
               <span className="relative z-10">Kembali ke Atas</span>
               <span className="relative z-10">↑</span>
@@ -1043,20 +1099,25 @@ public function approveClaim(ClaimRequest $request, int $claimId) {
         </div>
       </footer>
 
-      {/* Ripple Animation Style */}
+      {/* Ripple Animation Style & Laser Scan */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes ripple-effect {
-          from { transform: scale(0); opacity: 0.5; }
+          from { transform: scale(0); opacity: 0.55; }
           to { transform: scale(2.8); opacity: 0; }
         }
         .ripple-animation {
           position: absolute;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.45);
+          background: rgba(255, 255, 255, 0.5);
           transform: scale(0);
           animation: ripple-effect 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
           pointer-events: none;
           z-index: 30;
+        }
+        @keyframes scan {
+          0% { top: 12%; opacity: 0.2; }
+          50% { top: 88%; opacity: 1; }
+          100% { top: 12%; opacity: 0.2; }
         }
         @keyframes fadeIn {
           from { opacity: 0; }
