@@ -10,11 +10,9 @@ export default function Home() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isPillarsVisible, setIsPillarsVisible] = useState(false);
 
-  // Splash Screen State (5 Detik Countdown & Telemetri HUD)
+  // Splash Screen State (5 Detik Smooth Cinematic)
   const [isLoading, setIsLoading] = useState(true);
   const [isExiting, setIsExiting] = useState(false);
-  const [loadingProgress, setLoadingProgress] = useState(0);
-  const [telemetryLog, setTelemetryLog] = useState("INITIALIZING KERNEL MODULES...");
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,39 +23,16 @@ export default function Home() {
   const mouseRef = useRef({ x: 0, y: 0 }); 
   const pillarsRef = useRef<HTMLElement | null>(null);
 
-  // Splash Screen 5 Detik Timer Presisi & Telemetri
+  // Splash Screen 5 Detik Timer Presisi
   useEffect(() => {
-    const logs = [
-      "SYNCHRONIZING CORE WORKSPACE...",
-      "CALIBRATING NEURAL CANVAS...",
-      "FETCHING REPOSITORY TELEMETRY...",
-      "ASSEMBLING UI/UX TOKENS...",
-      "DEPLOYING HIGH-TIER PRODUCTION SYSTEM..."
-    ];
+    const timer = setTimeout(() => {
+      setIsExiting(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 700);
+    }, 5000);
 
-    const startTime = Date.now();
-    const duration = 5000;
-
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      const current = Math.min(Math.floor((elapsed / duration) * 100), 100);
-      setLoadingProgress(current);
-
-      const logIdx = Math.min(Math.floor((current / 100) * logs.length), logs.length - 1);
-      setTelemetryLog(logs[logIdx]);
-
-      if (current >= 100) {
-        clearInterval(interval);
-        setTimeout(() => {
-          setIsExiting(true);
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 800);
-        }, 200);
-      }
-    }, 40);
-
-    return () => clearInterval(interval);
+    return () => clearTimeout(timer);
   }, []);
 
   // 1. Particle Canvas Engine
@@ -313,8 +288,6 @@ export default function Home() {
       accentGradient: "from-emerald-500/25 via-teal-500/10 to-transparent",
       cardBorder: "border-emerald-500/40 hover:border-emerald-400",
       btnGradient: "from-emerald-500 via-teal-600 to-emerald-600 hover:from-emerald-400 hover:to-teal-500",
-      badge: "FULL-STACK WEB",
-      badgeColor: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
       scale: "scale-105",
       glowColor: "rgba(16, 185, 129, 0.45)",
       demoLink: "https://mind-haven-opal.vercel.app/",
@@ -345,8 +318,6 @@ export const handlePatientBooking = async (payload: BookingRecord) => {
       accentGradient: "from-blue-600/25 via-indigo-600/10 to-transparent",
       cardBorder: "border-blue-500/40 hover:border-blue-400",
       btnGradient: "from-blue-600 via-indigo-600 to-cyan-600 hover:from-blue-500 hover:to-indigo-500",
-      badge: "FULL-STACK WEB",
-      badgeColor: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
       scale: "scale-105",
       glowColor: "rgba(59, 130, 246, 0.45)",
       desc: "Aplikasi pemesanan lapangan olahraga real-time untuk mencegah konflik jadwal ganda secara otomatis.",
@@ -379,8 +350,6 @@ const bookSlot = async (slotId: number, userId: string) => {
       accentGradient: "from-amber-500/25 via-orange-500/10 to-transparent",
       cardBorder: "border-amber-500/40 hover:border-amber-400",
       btnGradient: "from-amber-500 via-orange-600 to-amber-600 hover:from-amber-400 hover:to-orange-500",
-      badge: "IN PROGRESS",
-      badgeColor: "text-amber-400 bg-amber-500/10 border-amber-500/30",
       scale: "scale-95",
       glowColor: "rgba(245, 158, 11, 0.45)",
       desc: "Platform pengelolaan kas operasional dan validasi pengajuan klaim berjenjang untuk akurasi audit keuangan.",
@@ -408,71 +377,46 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
   return (
     <div className="relative w-full min-h-screen bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-slate-100 selection:bg-cyan-500 selection:text-white overflow-hidden font-sans antialiased transition-colors duration-300">
 
-      {/* ================= ULTRA-TIER 5 SECONDS SAAS SPLASH SCREEN ================= */}
+      {/* ================= REFINED 5S SPLASH SCREEN (NO NUMBERS, NO BADGES) ================= */}
       {isLoading && (
         <div
-          className={`fixed inset-0 z-100 flex flex-col items-center justify-center bg-[#050811] transition-all duration-800 ease-in-out select-none ${
+          className={`fixed inset-0 z-100 flex flex-col items-center justify-center bg-[#050811] transition-all duration-700 ease-in-out select-none ${
             isExiting ? "opacity-0 scale-105 pointer-events-none" : "opacity-100 scale-100"
           }`}
         >
-          {/* Multi-layered Laser Grid Background */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.15)_0,transparent_70%)] pointer-events-none" />
+          {/* Subtle Ambient Depth */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.18)_0,transparent_65%)] pointer-events-none" />
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[40px_40px] pointer-events-none" />
 
-          {/* Glowing Ambient Auroras */}
-          <div className="absolute w-96 h-96 rounded-full bg-cyan-500/20 blur-[120px] pointer-events-none animate-pulse" />
-          <div className="absolute w-80 h-80 rounded-full bg-indigo-600/20 blur-[100px] pointer-events-none" />
-
-          {/* Central Holographic Sphere & Scanner Assembly */}
-          <div className="relative z-10 flex flex-col items-center max-w-md px-6 text-center">
+          {/* Central Logo Assembly */}
+          <div className="relative z-10 flex flex-col items-center max-w-sm px-6 text-center">
             
-            <div className="relative flex items-center justify-center w-52 h-52 mb-8">
-              {/* Outer Orbit 1 */}
+            <div className="relative flex items-center justify-center w-48 h-48 mb-6">
+              {/* Outer Subtle Orbit */}
               <div className="absolute inset-0 rounded-full border border-cyan-400/25 border-dashed animate-spin-slow pointer-events-none" />
               {/* Counter Rotating Ring */}
-              <div className="absolute inset-3 rounded-full border border-indigo-500/30 border-t-cyan-400 border-r-transparent animate-[spin_6s_linear_infinite_reverse] pointer-events-none" />
-              {/* Inner Pulsing Radar Ring */}
-              <div className="absolute inset-7 rounded-full border border-emerald-400/20 animate-ping pointer-events-none" />
-              
-              {/* Laser Scan Sweep Line */}
-              <div className="absolute inset-x-4 h-0.5 bg-linear-to-r from-transparent via-cyan-400 to-transparent animate-[scan_2.5s_ease-in-out_infinite] shadow-[0_0_15px_#22d3ee] pointer-events-none z-20" />
+              <div className="absolute inset-2 rounded-full border border-indigo-500/30 border-t-cyan-400 border-r-transparent animate-[spin_5s_linear_infinite_reverse] pointer-events-none" />
+              {/* Soft Pulsing Glow */}
+              <div className="absolute inset-4 rounded-full bg-cyan-500/10 blur-xl animate-pulse pointer-events-none" />
 
-              {/* Core Profile Shield */}
-              <div className="relative w-28 h-28 rounded-3xl overflow-hidden bg-[#0a1224] border-2 border-cyan-400 shadow-[0_0_40px_rgba(6,182,212,0.5)] p-1.5 flex items-center justify-center z-10 group">
+              {/* Core Shield */}
+              <div className="relative w-24 h-24 rounded-2xl overflow-hidden bg-[#0a1224] border-2 border-cyan-400 shadow-[0_0_35px_rgba(6,182,212,0.45)] p-1 flex items-center justify-center z-10">
                 <img
                   src="/logo-najwan.jpg"
                   alt="Najwan Muyassar Logo"
-                  className="w-full h-full object-cover rounded-2xl filter brightness-105"
+                  className="w-full h-full object-cover rounded-xl filter brightness-105"
                 />
               </div>
             </div>
 
-            {/* Title & Identity */}
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 font-mono text-[10px] tracking-widest uppercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]" />
-                SYSTEM ARCHITECTURE ENGINE
-              </div>
-
-              <h2 className="text-2xl font-black uppercase tracking-[0.2em] text-white">
+            {/* Clean Name Display */}
+            <div className="space-y-1.5">
+              <h2 className="text-xl font-black uppercase tracking-[0.25em] text-white">
                 NAJWAN <span className="bg-linear-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">MUYASSAR</span>
               </h2>
-            </div>
-
-            {/* Realtime Live Counter Display (No Loading Bar) */}
-            <div className="mt-8 space-y-3 w-full">
-              <div className="flex items-baseline justify-center gap-1.5 font-mono">
-                <span className="text-5xl font-black tracking-tight text-white drop-shadow-[0_0_20px_rgba(6,182,212,0.6)]">
-                  {loadingProgress}
-                </span>
-                <span className="text-lg font-bold text-cyan-400">%</span>
-              </div>
-
-              {/* Dynamic HUD Telemetry Feed */}
-              <div className="font-mono text-xs text-slate-400 tracking-wider h-5 flex items-center justify-center gap-2">
-                <span className="text-cyan-400 font-bold">&gt;&gt;</span>
-                <span className="text-cyan-300/90">{telemetryLog}</span>
-              </div>
+              <p className="text-[11px] font-mono text-cyan-400/80 uppercase tracking-widest">
+                SYSTEM ARCHITECT & DEVELOPER
+              </p>
             </div>
 
           </div>
@@ -504,11 +448,7 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
 
           {/* LEFT COLUMN */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/40 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-bold tracking-wide shadow-[0_0_15px_rgba(6,182,212,0.15)]">
-                TERBUKA UNTUK PROYEK & REKRUTMEN
-              </div>
-
+            <div className="space-y-2">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
                 Najwan Muyassar
               </h1>
@@ -613,10 +553,6 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
           </div>
 
           <div className="space-y-4">
-            <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-bold tracking-wider border border-cyan-400/30">
-              TENTANG SAYA
-            </div>
-
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight uppercase leading-snug">
               <span className="bg-linear-to-r from-slate-900 via-blue-700 to-cyan-600 dark:from-white dark:via-sky-200 dark:to-blue-400 bg-clip-text text-transparent">
                 Fokus Pada Hasil & Kualitas
@@ -644,10 +580,7 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
       {/* ================= RECENT PROJECT SHOWCASE ================= */}
       <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-16 border-t border-slate-200 dark:border-white/10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
-          <div className="space-y-1.5">
-            <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-bold tracking-wider border border-cyan-400/30">
-              PORTFOLIO
-            </div>
+          <div className="space-y-1">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight uppercase">
               <span className="bg-linear-to-r from-slate-900 via-blue-700 to-cyan-600 dark:from-white dark:via-sky-200 dark:to-blue-400 bg-clip-text text-transparent">
                 Proyek Pilihan
@@ -688,9 +621,7 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-3">
                   <span className="font-mono text-xs font-bold text-slate-400">0{idx + 1}</span>
-                  <span className={`font-mono text-[10px] px-2.5 py-1 rounded-md font-bold tracking-wider uppercase border ${project.badgeColor}`}>
-                    {project.badge}
-                  </span>
+                  <span className="font-mono text-xs font-semibold text-slate-400">Project Spec</span>
                 </div>
 
                 <div className="relative w-full h-44 rounded-xl flex items-center justify-center p-3 mb-4 bg-slate-100 dark:bg-[#0c172e] border border-slate-200 dark:border-white/10 group-hover:border-cyan-400/40 transition-colors">
@@ -721,10 +652,6 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
       {/* ================= THREE PILLARS OF MASTERY ================= */}
       <section ref={pillarsRef} className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-16 border-t border-slate-200 dark:border-white/10">
         <div className={`space-y-2 mb-10 text-center max-w-3xl mx-auto transition-all duration-500 ${isPillarsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-bold tracking-wider border border-cyan-400/30">
-            FOKUS KEAHLIAN
-          </div>
-
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight uppercase">
             <span className="bg-linear-to-r from-slate-900 via-blue-700 to-cyan-600 dark:from-white dark:via-sky-200 dark:to-blue-400 bg-clip-text text-transparent">
               Keahlian Utama
@@ -749,13 +676,8 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
             <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
 
             <div className="space-y-3.5 relative z-10">
-              <div className="flex items-center justify-between">
-                <div className="w-11 h-11 rounded-xl bg-cyan-500/15 flex items-center justify-center border border-cyan-400/40 text-cyan-600 dark:text-cyan-400 shadow-xs">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-                </div>
-                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 font-bold uppercase border border-cyan-400/30">
-                  Full-Stack
-                </span>
+              <div className="w-11 h-11 rounded-xl bg-cyan-500/15 flex items-center justify-center border border-cyan-400/40 text-cyan-600 dark:text-cyan-400 shadow-xs">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
               </div>
 
               <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors">
@@ -794,13 +716,8 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
             <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
 
             <div className="space-y-3.5 relative z-10">
-              <div className="flex items-center justify-between">
-                <div className="w-11 h-11 rounded-xl bg-amber-500/15 flex items-center justify-center border border-amber-400/40 text-amber-600 dark:text-amber-400 shadow-xs">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                </div>
-                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-300 font-bold uppercase border border-amber-400/30">
-                  BI & Analytics
-                </span>
+              <div className="w-11 h-11 rounded-xl bg-amber-500/15 flex items-center justify-center border border-amber-400/40 text-amber-600 dark:text-amber-400 shadow-xs">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
               </div>
 
               <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">
@@ -839,13 +756,8 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl pointer-events-none" />
 
             <div className="space-y-3.5 relative z-10">
-              <div className="flex items-center justify-between">
-                <div className="w-11 h-11 rounded-xl bg-purple-500/15 flex items-center justify-center border border-purple-400/40 text-purple-600 dark:text-purple-400 shadow-xs">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
-                </div>
-                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-purple-500/15 text-purple-700 dark:text-purple-300 font-bold uppercase border border-purple-400/30">
-                  UI/UX
-                </span>
+              <div className="w-11 h-11 rounded-xl bg-purple-500/15 flex items-center justify-center border border-purple-400/40 text-purple-600 dark:text-purple-400 shadow-xs">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
               </div>
 
               <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-purple-500 dark:group-hover:text-purple-400 transition-colors">
@@ -878,9 +790,6 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
       <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-10 mb-6">
         <div className="p-8 sm:p-10 rounded-2xl bg-linear-to-r from-cyan-500/15 via-blue-600/10 to-indigo-600/15 border-2 border-cyan-400/40 flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_8px_30px_rgba(6,182,212,0.2)] backdrop-blur-xl">
           <div className="space-y-1.5 text-center md:text-left">
-            <span className="inline-block px-3 py-0.5 rounded-full bg-cyan-500/20 text-cyan-600 dark:text-cyan-300 font-mono text-xs uppercase font-bold border border-cyan-400/30">
-              LANGKAH BERIKUTNYA
-            </span>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight uppercase">
               <span className="bg-linear-to-r from-slate-900 via-blue-700 to-cyan-600 dark:from-white dark:via-sky-200 dark:to-blue-400 bg-clip-text text-transparent">
                 Punya Rencana Proyek atau Posisi yang Cocok?
@@ -902,7 +811,7 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
         </div>
       </section>
 
-      {/* ================= PROJECT DETAIL MODAL (CLEANED) ================= */}
+      {/* ================= PROJECT DETAIL MODAL ================= */}
       {isModalOpen && selectedProject && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 animate-fade-in">
           <div 
@@ -914,12 +823,7 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
             
             {/* Header */}
             <div className="p-5 border-b border-slate-100 dark:border-white/10 flex items-center justify-between bg-slate-50/50 dark:bg-white/5">
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-600 dark:text-cyan-400 font-bold">
-                  SPESIFIKASI PROYEK
-                </span>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">{selectedProject.title}</h3>
-              </div>
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">{selectedProject.title}</h3>
               <button 
                 onClick={closeModal}
                 className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/10 text-slate-500 hover:text-slate-900 dark:hover:text-white flex items-center justify-center transition-colors cursor-pointer text-sm font-bold"
@@ -1099,7 +1003,7 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
         </div>
       </footer>
 
-      {/* Ripple Animation Style & Laser Scan */}
+      {/* Ripple Animation Style */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes ripple-effect {
           from { transform: scale(0); opacity: 0.55; }
@@ -1113,11 +1017,6 @@ public function approveClaim(ClaimRequest $request, int$claimId) {
           animation: ripple-effect 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
           pointer-events: none;
           z-index: 30;
-        }
-        @keyframes scan {
-          0% { top: 12%; opacity: 0.2; }
-          50% { top: 88%; opacity: 1; }
-          100% { top: 12%; opacity: 0.2; }
         }
         @keyframes fadeIn {
           from { opacity: 0; }
